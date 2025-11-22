@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="TIM 定时器定时器基础功能12345678910HAL_TIM_Base_InitHAL_TIM_Base_DeInitHAL_TIM_Base_MspInitHAL_TIM_Base_MspDeInitHAL_TIM_Base_StartHAL_TIM_Base_StopHAL_TIM_Base_Start_ITHAL_TIM_Base_Stop_ITHAL_TIM_Base_Start_DM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HAL库速查函数">
+<meta property="og:url" content="http://example.com/2025/11/22/HAL%E5%BA%93%E9%80%9F%E6%9F%A5%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TIM 定时器定时器基础功能12345678910HAL_TIM_Base_InitHAL_TIM_Base_DeInitHAL_TIM_Base_MspInitHAL_TIM_Base_MspDeInitHAL_TIM_Base_StartHAL_TIM_Base_StopHAL_TIM_Base_Start_ITHAL_TIM_Base_Stop_ITHAL_TIM_Base_Start_DM">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-11-22T06:09:04.000Z">
+<meta property="article:modified_time" content="2025-11-22T06:24:40.028Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>HAL库速查函数 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HAL库速查函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-22 14:09" pubdate>
+          November 22, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          937 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">HAL库速查函数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="TIM-定时器"><a href="#TIM-定时器" class="headerlink" title="TIM 定时器"></a>TIM 定时器</h3><h4 id="定时器基础功能"><a href="#定时器基础功能" class="headerlink" title="定时器基础功能"></a>定时器基础功能</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">HAL<span class="hljs-emphasis">_TIM_Base_Init</span><br><span class="hljs-emphasis">HAL_TIM_Base_DeInit</span><br><span class="hljs-emphasis">HAL_TIM_Base_MspInit</span><br><span class="hljs-emphasis">HAL_TIM_Base_MspDeInit</span><br><span class="hljs-emphasis">HAL_TIM_Base_Start</span><br><span class="hljs-emphasis">HAL_TIM_Base_Stop</span><br><span class="hljs-emphasis">HAL_TIM_Base_Start_IT</span><br><span class="hljs-emphasis">HAL_TIM_Base_Stop_IT</span><br><span class="hljs-emphasis">HAL_TIM_Base_Start_DMA</span><br><span class="hljs-emphasis">HAL_TIM_Base_Stop_</span>DM<br></code></pre></td></tr></table></figure>
+
+<h4 id="输出比较功能"><a href="#输出比较功能" class="headerlink" title="输出比较功能"></a>输出比较功能</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">HAL<span class="hljs-emphasis">_TIM_OC_Init</span><br><span class="hljs-emphasis">HAL_TIM_OC_DeInit</span><br><span class="hljs-emphasis">HAL_TIM_OC_MspInit</span><br><span class="hljs-emphasis">HAL_TIM_OC_MspDeInit</span><br><span class="hljs-emphasis">HAL_TIM_OC_Start</span><br><span class="hljs-emphasis">HAL_TIM_OC_Stop</span><br><span class="hljs-emphasis">HAL_TIM_OC_Start_IT</span><br><span class="hljs-emphasis">HAL_TIM_OC_Stop_IT</span><br><span class="hljs-emphasis">HAL_TIM_OC_Start_DMA</span><br><span class="hljs-emphasis">HAL_TIM_OC_Stop_</span>DMA<br></code></pre></td></tr></table></figure>
+
+<h4 id="PWM功能"><a href="#PWM功能" class="headerlink" title="PWM功能"></a>PWM功能</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">HAL<span class="hljs-emphasis">_TIM_PWM_Init</span><br><span class="hljs-emphasis">HAL_TIM_PWM_DeInit</span><br><span class="hljs-emphasis">HAL_TIM_PWM_MspInit</span><br><span class="hljs-emphasis">HAL_TIM_PWM_MspDeInit</span><br><span class="hljs-emphasis">HAL_TIM_PWM_Start</span><br><span class="hljs-emphasis">HAL_TIM_PWM_Stop</span><br><span class="hljs-emphasis">HAL_TIM_PWM_Start_IT</span><br><span class="hljs-emphasis">HAL_TIM_PWM_Stop_IT</span><br><span class="hljs-emphasis">HAL_TIM_PWM_Start_DMA</span><br><span class="hljs-emphasis">HAL_TIM_PWM_Stop_</span>DMA<br></code></pre></td></tr></table></figure>
+
+<h4 id="输入捕获功能"><a href="#输入捕获功能" class="headerlink" title="输入捕获功能"></a>输入捕获功能</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">HAL<span class="hljs-emphasis">_TIM_IC_Init</span><br><span class="hljs-emphasis">HAL_TIM_IC_DeInit</span><br><span class="hljs-emphasis">HAL_TIM_IC_MspInit</span><br><span class="hljs-emphasis">HAL_TIM_IC_MspDeInit</span><br><span class="hljs-emphasis">HAL_TIM_IC_Start</span><br><span class="hljs-emphasis">HAL_TIM_IC_Stop</span><br><span class="hljs-emphasis">HAL_TIM_IC_Start_IT</span><br><span class="hljs-emphasis">HAL_TIM_IC_Stop_IT</span><br><span class="hljs-emphasis">HAL_TIM_IC_Start_DMA</span><br><span class="hljs-emphasis">HAL_TIM_IC_Stop_</span>DMA<br></code></pre></td></tr></table></figure>
+
+<h4 id="单脉冲模式"><a href="#单脉冲模式" class="headerlink" title="单脉冲模式"></a>单脉冲模式</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">HAL<span class="hljs-emphasis">_TIM_OnePulse_Init</span><br><span class="hljs-emphasis">HAL_TIM_OnePulse_DeInit</span><br><span class="hljs-emphasis">HAL_TIM_OnePulse_MspInit</span><br><span class="hljs-emphasis">HAL_TIM_OnePulse_MspDeInit</span><br><span class="hljs-emphasis">HAL_TIM_OnePulse_Start</span><br><span class="hljs-emphasis">HAL_TIM_OnePulse_Stop</span><br><span class="hljs-emphasis">HAL_TIM_OnePulse_Start_IT</span><br><span class="hljs-emphasis">HAL_TIM_OnePulse_Stop_</span>IT<br></code></pre></td></tr></table></figure>
+
+<h4 id="编码器功能"><a href="#编码器功能" class="headerlink" title="编码器功能"></a>编码器功能</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">HAL<span class="hljs-emphasis">_TIM_Encoder_Init</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_DeInit</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_MspInit</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_MspDeInit</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_Start</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_Stop</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_Start_IT</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_Stop_IT</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_Start_DMA</span><br><span class="hljs-emphasis">HAL_TIM_Encoder_Stop_</span>DMA<br></code></pre></td></tr></table></figure>
+
+<h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">HAL<span class="hljs-emphasis">_TIM_PeriodElapsedCallback</span><br><span class="hljs-emphasis">HAL_TIM_PeriodElapsedHalfCpltCallback</span><br><span class="hljs-emphasis">HAL_TIM_OC_DelayElapsedCallback</span><br><span class="hljs-emphasis">HAL_TIM_IC_CaptureCallback</span><br><span class="hljs-emphasis">HAL_TIM_IC_CaptureHalfCpltCallback</span><br><span class="hljs-emphasis">HAL_TIM_PWM_PulseFinishedCallback</span><br><span class="hljs-emphasis">HAL_TIM_PWM_PulseFinishedHalfCpltCallback</span><br><span class="hljs-emphasis">HAL_TIM_TriggerCallback</span><br><span class="hljs-emphasis">HAL_TIM_TriggerHalfCpltCallback</span><br><span class="hljs-emphasis">HAL_TIM_</span>ErrorCallback<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="HAL-库函数"><a href="#HAL-库函数" class="headerlink" title="HAL 库函数"></a>HAL 库函数</h3><h4 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_GPIO_WritePin(端口, 引脚号, 电平状态);   <span class="hljs-comment">// 写引脚电平</span><br>HAL_GPIO_ReadPin(端口, 引脚号);             <span class="hljs-comment">// 读引脚电平</span><br>HAL_GPIO_TogglePin(端口, 引脚号);           <span class="hljs-comment">// 翻转引脚电平</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_UART_Transmit(&amp;串口句柄, 数据指针, 数据长度, 超时时间);    <span class="hljs-comment">// 串口发送（阻塞方式）</span><br>HAL_UART_Receive(&amp;串口句柄, 数据指针, 数据长度, 超时时间);     <span class="hljs-comment">// 串口接收（阻塞方式）</span><br>HAL_UART_Transmit_IT(&amp;串口句柄, 数据指针, 数据长度);           <span class="hljs-comment">// 串口发送（中断方式）</span><br>HAL_UART_Receive_IT(&amp;串口句柄, 数据指针, 数据长度);            <span class="hljs-comment">// 串口接收（中断方式）</span><br>HAL_UART_Transmit_DMA(&amp;串口句柄, 数据指针, 数据长度);          <span class="hljs-comment">// 串口发送（DMA方式）</span><br>HAL_UART_Receive_DMA(&amp;串口句柄, 数据指针, 数据长度);           <span class="hljs-comment">// 串口接收（DMA方式）</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="IIC"><a href="#IIC" class="headerlink" title="IIC"></a>IIC</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_I2C_Master_Transmit(&amp;I2C句柄, 设备地址, 数据指针, 数据长度, 超时时间);   <span class="hljs-comment">// 主机发送数据（阻塞方式）</span><br>HAL_I2C_Master_Receive(&amp;I2C句柄, 设备地址, 数据指针, 数据长度, 超时时间);    <span class="hljs-comment">// 主机接收数据（阻塞方式）</span><br>HAL_I2C_Master_Transmit_IT(&amp;I2C句柄, 设备地址, 数据指针, 数据长度);          <span class="hljs-comment">// 主机发送数据（中断方式）</span><br>HAL_I2C_Master_Receive_IT(&amp;I2C句柄, 设备地址, 数据指针, 数据长度);           <span class="hljs-comment">// 主机接收数据（中断方式）</span><br>HAL_I2C_Master_Transmit_DMA(&amp;I2C句柄, 设备地址, 数据指针, 数据长度);         <span class="hljs-comment">// 主机发送数据（DMA方式）</span><br>HAL_I2C_Master_Receive_DMA(&amp;I2C句柄, 设备地址, 数据指针, 数据长度);          <span class="hljs-comment">// 主机接收数据（DMA方式）</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_SPI_Transmit(&amp;SPI句柄, 数据指针, 数据长度, 超时时间);      <span class="hljs-comment">// 发送数据（阻塞方式）</span><br>HAL_SPI_Receive(&amp;SPI句柄, 数据指针, 数据长度, 超时时间);       <span class="hljs-comment">// 接收数据（阻塞方式）</span><br>HAL_SPI_TransmitReceive(&amp;SPI句柄, 发送指针, 接收指针, 数据长度, 超时时间);  <span class="hljs-comment">// 同时收发（阻塞方式）</span><br>HAL_SPI_Transmit_IT(&amp;SPI句柄, 数据指针, 数据长度);             <span class="hljs-comment">// 发送数据（中断方式）</span><br>HAL_SPI_Receive_IT(&amp;SPI句柄, 数据指针, 数据长度);              <span class="hljs-comment">// 接收数据（中断方式）</span><br>HAL_SPI_TransmitReceive_IT(&amp;SPI句柄, 发送指针, 接收指针, 数据长度);  <span class="hljs-comment">// 同时收发（中断方式）</span><br>HAL_SPI_Transmit_DMA(&amp;SPI句柄, 数据指针, 数据长度);            <span class="hljs-comment">// 发送数据（DMA方式）</span><br>HAL_SPI_Receive_DMA(&amp;SPI句柄, 数据指针, 数据长度);             <span class="hljs-comment">// 接收数据（DMA方式）</span><br>HAL_SPI_TransmitReceive_DMA(&amp;SPI句柄, 发送指针, 接收指针, 数据长度); <span class="hljs-comment">// 同时收发（DMA方式）</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="ADC"><a href="#ADC" class="headerlink" title="ADC"></a>ADC</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_ADC_Start(&amp;ADC句柄);                   <span class="hljs-comment">// 启动ADC转换（阻塞方式）</span><br>HAL_ADC_Stop(&amp;ADC句柄);                    <span class="hljs-comment">// 停止ADC转换</span><br>HAL_ADC_Start_IT(&amp;ADC句柄);                <span class="hljs-comment">// 启动ADC转换（中断方式）</span><br>HAL_ADC_Stop_IT(&amp;ADC句柄);                 <span class="hljs-comment">// 停止ADC转换（中断方式）</span><br>HAL_ADC_Start_DMA(&amp;ADC句柄, 数据指针, 长度);   <span class="hljs-comment">// 启动ADC转换（DMA方式）</span><br>HAL_ADC_Stop_DMA(&amp;ADC句柄);                   <span class="hljs-comment">// 停止ADC转换（DMA方式）</span><br>HAL_ADC_PollForConversion(&amp;ADC句柄, 超时时间);  <span class="hljs-comment">// 等待ADC转换完成（阻塞轮询）</span><br>HAL_ADC_GetValue(&amp;ADC句柄);                   <span class="hljs-comment">// 获取ADC采样值</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="中断-事件回调函数"><a href="#中断-事件回调函数" class="headerlink" title="中断&#x2F;事件回调函数"></a>中断&#x2F;事件回调函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c">HAL_GPIO_EXTI_Callback(<span class="hljs-type">uint16_t</span> 引脚号);            <span class="hljs-comment">// 外部中断回调（GPIO口触发）</span><br>HAL_UART_TxCpltCallback(UART_HandleTypeDef *串口句柄);       <span class="hljs-comment">// UART发送完成回调（中断/DMA）</span><br>HAL_UART_RxCpltCallback(UART_HandleTypeDef *串口句柄);       <span class="hljs-comment">// UART接收完成回调（中断/DMA）</span><br>HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *串口句柄, <span class="hljs-type">uint16_t</span> 数据长度);  <span class="hljs-comment">// UART接收事件回调（如IDLE触发接收长度）</span><br>HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *I2C句柄);    <span class="hljs-comment">// I2C主机发送完成回调（中断/DMA）</span><br>HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *I2C句柄);    <span class="hljs-comment">// I2C主机接收完成回调（中断/DMA）</span><br>HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *SPI句柄);           <span class="hljs-comment">// SPI发送完成回调（中断/DMA）</span><br>HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *SPI句柄);           <span class="hljs-comment">// SPI接收完成回调（中断/DMA）</span><br>HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *SPI句柄);         <span class="hljs-comment">// SPI同时收发完成回调（中断/DMA）</span><br>HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *ADC句柄);         <span class="hljs-comment">// ADC转换完成回调（阻塞/中断/DMA）</span><br>HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *定时器句柄); <span class="hljs-comment">// 定时器周期溢出回调</span><br>HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *定时器句柄);    <span class="hljs-comment">// 定时器输入捕获完成回调</span><br>HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *定时器句柄); <span class="hljs-comment">// PWM脉冲完成回调</span><br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HAL库速查函数</div>
+      <div>http://example.com/2025/11/22/HAL库速查函数/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 22, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/30/%E5%85%B3%E4%BA%8E%E7%BE%BD%E6%AF%9B%E7%90%83%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%80%E6%88%98%E6%9C%AF/" title="关于羽毛球的一些技战术">
+                        <span class="hidden-mobile">关于羽毛球的一些技战术</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
