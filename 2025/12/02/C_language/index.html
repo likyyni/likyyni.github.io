@@ -26,18 +26,18 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="C 语言核心笔记：内存与结构体1. 字符数组定义的区别在 C 语言中，初始化字符数组的方式决定了内存布局：  双引号形式：char buf[] &#x3D; &quot;abc&quot;;  特点：编译器会自动在末尾添加 \0。  安全性：高。使用 strlen() 或 printf(&quot;%s&quot;) 时能正确找到结束标志。  大小：sizeof(buf) 为 4（包含 \0）。  大括号列">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="d:\code\MarkDownFile\images\image-20251229145245528.png">
-<meta property="og:image" content="d:\code\MarkDownFile\images\image-20251229145303563.png">
-<meta property="og:image" content="d:\code\MarkDownFile\images\image-20251229145338654.png">
-<meta property="og:image" content="http://example.com/image1.png">
-<meta property="og:image" content="d:\code\new-blog\source_posts\C_language\image1.png">
+<meta property="og:image" content="http://example.com/2025/12/02/C_language/code/MarkDownFile/images/image-20251229145245528.png">
+<meta property="og:image" content="http://example.com/2025/12/02/C_language/code/MarkDownFile/images/image-20251229145303563.png">
+<meta property="og:image" content="http://example.com/2025/12/02/C_language/code/MarkDownFile/images/image-20251229145338654.png">
+<meta property="og:image" content="http://example.com/2025/12/02/C_language/image1.png">
+<meta property="og:image" content="http://example.com/2025/12/02/C_language/code/new-blog/source_posts/C_language/image1.png">
 <meta property="article:published_time" content="2025-12-02T10:50:00.000Z">
-<meta property="article:modified_time" content="2026-01-05T08:54:01.989Z">
+<meta property="article:modified_time" content="2026-01-05T11:57:58.349Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="C语言">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="d:\code\MarkDownFile\images\image-20251229145245528.png">
+<meta name="twitter:image" content="http://example.com/2025/12/02/C_language/code/MarkDownFile/images/image-20251229145245528.png">
   
   
   
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5k words
+          5.1k words
         
       </span>
     
@@ -567,9 +567,9 @@ printf(&quot;%d, %zd\n&quot;,sizeof(asd),strlen(asd)    ); //6， 5
 
 
 <hr>
-<h1 id="C-语言笔试深度解析：指针运算与内存布局"><a href="#C-语言笔试深度解析：指针运算与内存布局" class="headerlink" title="C 语言笔试深度解析：指针运算与内存布局"></a>C 语言笔试深度解析：指针运算与内存布局</h1><p><img src="D:\code\MarkDownFile\images\image-20251229145245528.png" srcset="/img/loading.gif" lazyload alt="image-20251229145245528"></p>
-<p><img src="D:\code\MarkDownFile\images\image-20251229145303563.png" srcset="/img/loading.gif" lazyload alt="image-20251229145303563"></p>
-<p><img src="D:\code\MarkDownFile\images\image-20251229145338654.png" srcset="/img/loading.gif" lazyload alt="image-20251229145338654"></p>
+<h1 id="C-语言笔试深度解析：指针运算与内存布局"><a href="#C-语言笔试深度解析：指针运算与内存布局" class="headerlink" title="C 语言笔试深度解析：指针运算与内存布局"></a>C 语言笔试深度解析：指针运算与内存布局</h1><p><img src="/2025/12/02/C_language/code\MarkDownFile\images\image-20251229145245528.png" srcset="/img/loading.gif" lazyload alt="image-20251229145245528"></p>
+<p><img src="/2025/12/02/C_language/code\MarkDownFile\images\image-20251229145303563.png" srcset="/img/loading.gif" lazyload alt="image-20251229145303563"></p>
+<p><img src="/2025/12/02/C_language/code\MarkDownFile\images\image-20251229145338654.png" srcset="/img/loading.gif" lazyload alt="image-20251229145338654"></p>
 <p>这道题属于 C 语言笔试中的“深水区”，重点考察<strong>指针运算规则</strong>、<strong>数组名本质</strong>以及<strong>计算机底层存储（大端&#x2F;小端）</strong>。</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">int</span> main()<br>&#123;<br>    <span class="hljs-keyword">int</span> a[<span class="hljs-number">4</span>] = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span> &#125;;<br>    <span class="hljs-keyword">int</span> *ptr1 = (<span class="hljs-keyword">int</span> *)(&amp;a + <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">int</span> *ptr2 = (<span class="hljs-keyword">int</span> *)((<span class="hljs-keyword">int</span>)a + <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">printf</span>( <span class="hljs-string">&quot;<span class="hljs-variable">%x</span>,<span class="hljs-variable">%x</span>&quot;</span>, ptr1[-<span class="hljs-number">1</span>], *ptr2);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -588,14 +588,19 @@ printf(&quot;%d, %zd\n&quot;,sizeof(asd),strlen(asd)    ); //6， 5
 </ul>
 <h4 id="C-十六进制与内存地址"><a href="#C-十六进制与内存地址" class="headerlink" title="C. 十六进制与内存地址"></a>C. 十六进制与内存地址</h4><p><code>0x</code> 开头的数字是十六进制。在调试内存时，<code>0x1</code> 就是 1，<code>0x14</code> 就是 20。</p>
 <hr>
-<h2 id="1-数组名的“两个例外”—–这俩例外都是指的整个数组"><a href="#1-数组名的“两个例外”—–这俩例外都是指的整个数组" class="headerlink" title="1. 数组名的“两个例外”—–这俩例外都是指的整个数组"></a>1. 数组名的“两个例外”—–这俩例外都是指的整个数组</h2><p>在 C 语言中，数组名 <code>a</code> 通常会“退化”为指向首元素的指针（即 <code>&amp;a[0]</code>）。但在以下两种情况下，数组名代表<strong>整个数组实体</strong>：</p>
+<h2 id="1-数组名的“两个例外”—–这俩例外都是指的整个数组"><a href="#1-数组名的“两个例外”—–这俩例外都是指的整个数组" class="headerlink" title="1. 数组名的“两个例外”—–这俩例外都是指的整个数组"></a>1. 数组名的“两个例外”—–这俩例外都是指的整个数组</h2><p>在 C 语言中，数组名 <code>a</code> 通常会“退化”为指向首元素的指针（即 <code>&amp;a[0]</code>）。数组名 <code>a</code> 在不同语境下的含义不同：</p>
+<ul>
+<li><strong><code>a</code> (作为地址时):</strong> 代表数组首元素的地址，类型是 <code>int *</code>。</li>
+<li><strong><code>&amp;a</code>:</strong> 代表整个数组的地址，类型是 <code>int (*)[5]</code>（指向包含 5 个整数的数组的指针）。</li>
+</ul>
+<p>在以下两种情况下，数组名代表<strong>整个数组实体</strong>：</p>
 <ol>
 <li><strong><code>sizeof(a)</code></strong>：返回<strong>整个数组</strong>占用的内存大小（如 $4 \times 4 &#x3D; 16$ 字节）。</li>
 <li><strong><code>&amp;a</code></strong>：取的是<strong>整个数组的地址</strong>。虽然数值上和首元素地址相同，但其<strong>指针类型</strong>不同。</li>
 </ol>
-<h3 id="举例对比"><a href="#举例对比" class="headerlink" title="举例对比"></a>举例对比</h3><ul>
-<li><code>a + 1</code>：跨越一个 <code>int</code>（4 字节）。</li>
-<li><code>&amp;a + 1</code>：跨越<strong>整个数组</strong>（16 字节）。</li>
+<h3 id="举例对比"><a href="#举例对比" class="headerlink" title="举例对比"></a><u>举例对比</u></h3><ul>
+<li><u><code>a + 1</code>：跨越一个 <code>int</code>（4 字节）。</u></li>
+<li><u><code>&amp;a + 1</code>：跨越<strong>整个数组</strong>（16 字节）。</u></li>
 </ul>
 <blockquote>
 <p><strong>本题应用</strong>：<code>ptr1 = (int *)(&amp;a + 1)</code>，意味着 <code>ptr1</code> 指向了数组 <code>a</code> 最后一个元素 <code>4</code> 后面紧邻的内存位置。</p>
@@ -716,8 +721,8 @@ printf(&quot;%d, %zd\n&quot;,sizeof(asd),strlen(asd)    ); //6， 5
 <p>·最大成员是 c（8字节）。</p>
 <p>·最大基本类型是对齐要求为 8 的 double。</p>
 <p>·因此，该联合体的大小为 8 字节。</p>
-<h6 id="6-程序的局部变量存在于栈-stack-中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。"><a href="#6-程序的局部变量存在于栈-stack-中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。" class="headerlink" title="6.程序的局部变量存在于栈(stack) 中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。"></a>6.程序的局部变量存在于栈(stack) 中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。</h6><p><img src="/image1.png" srcset="/img/loading.gif" lazyload alt="image1"></p>
-<p><img src="D:\code\new-blog\source_posts\C_language\image1.png" srcset="/img/loading.gif" lazyload alt="image1"></p>
+<h6 id="6-程序的局部变量存在于栈-stack-中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。"><a href="#6-程序的局部变量存在于栈-stack-中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。" class="headerlink" title="6.程序的局部变量存在于栈(stack) 中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。"></a>6.程序的局部变量存在于栈(stack) 中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。</h6><p><img src="/2025/12/02/C_language/image1.png" srcset="/img/loading.gif" lazyload alt="image1"></p>
+<p><img src="/2025/12/02/C_language/code\new-blog\source_posts\C_language\image1.png" srcset="/img/loading.gif" lazyload alt="image1"></p>
 
                 
               </div>
@@ -789,9 +794,9 @@ printf(&quot;%d, %zd\n&quot;,sizeof(asd),strlen(asd)    ); //6， 5
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/05/test-generate-png/" title="test_generate_png">
+                      <a href="/2026/01/17/CeShiTuPian/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">test_generate_png</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
