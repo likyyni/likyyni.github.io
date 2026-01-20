@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="以下是这些嵌入式系统相关考试题目的标准答案和详细解释（基于2026年主流知识点，适合嵌入式&#x2F;计算机组成原理&#x2F;单片机考试）。我按题目顺序逐一给出，编程题直接给完整代码。 1. 【15分】说明嵌入式系统与通用计算系统的区别？并举例答案要点（可写成一段或分点）： 嵌入式系统（Embedded System）与通用计算系统（General-purpose Computing Syste">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2026/01/19/Test/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="以下是这些嵌入式系统相关考试题目的标准答案和详细解释（基于2026年主流知识点，适合嵌入式&#x2F;计算机组成原理&#x2F;单片机考试）。我按题目顺序逐一给出，编程题直接给完整代码。 1. 【15分】说明嵌入式系统与通用计算系统的区别？并举例答案要点（可写成一段或分点）： 嵌入式系统（Embedded System）与通用计算系统（General-purpose Computing Syste">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-19T08:48:14.416Z">
+<meta property="article:modified_time" content="2026-01-19T08:48:27.262Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-19 16:48" pubdate>
+          January 19, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header"></h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>以下是这些嵌入式系统相关考试题目的标准答案和详细解释（基于2026年主流知识点，适合嵌入式&#x2F;计算机组成原理&#x2F;单片机考试）。我按题目顺序逐一给出，编程题直接给完整代码。</p>
+<h3 id="1-【15分】说明嵌入式系统与通用计算系统的区别？并举例"><a href="#1-【15分】说明嵌入式系统与通用计算系统的区别？并举例" class="headerlink" title="1. 【15分】说明嵌入式系统与通用计算系统的区别？并举例"></a>1. 【15分】说明嵌入式系统与通用计算系统的区别？并举例</h3><p><strong>答案要点</strong>（可写成一段或分点）：</p>
+<p>嵌入式系统（Embedded System）与通用计算系统（General-purpose Computing System，如PC）的<strong>主要区别</strong>如下：</p>
+<ul>
+<li><strong>应用目的</strong>：嵌入式系统<strong>以特定应用为中心</strong>，软硬件高度裁剪、专用化；通用系统面向通用计算、多任务、多应用。</li>
+<li><strong>资源限制</strong>：嵌入式系统资源严格受限（CPU频率低、内存小、功耗低、体积小、成本低）；通用系统资源丰富。</li>
+<li><strong>实时性</strong>：嵌入式系统通常要求<strong>强实时性</strong>（硬实时&#x2F;软实时），响应时间确定、可预测；通用系统实时性要求低。</li>
+<li><strong>可靠性</strong>：嵌入式系统要求高可靠性、高稳定性（很多用于安全关键领域）；通用系统可靠性要求相对低。</li>
+<li><strong>开发方式</strong>：嵌入式系统软硬件紧密耦合、固化（程序烧录后基本不变）；通用系统软件可随意安装&#x2F;卸载。</li>
+<li><strong>操作系统</strong>：嵌入式常使用RTOS（如FreeRTOS、μC&#x2F;OS）或无OS裸机；通用系统用Windows&#x2F;Linux&#x2F;macOS。</li>
+</ul>
+<p><strong>举例</strong>：</p>
+<ul>
+<li>嵌入式系统：智能手机（Android&#x2F;iOS）、汽车ECU、路由器、智能电表、洗衣机控制器、医疗监护仪。</li>
+<li>通用计算系统：台式机、笔记本电脑、服务器。</li>
+</ul>
+<h3 id="2-【10分】请列举你知道的几个安全性的标准的名称？"><a href="#2-【10分】请列举你知道的几个安全性的标准的名称？" class="headerlink" title="2. 【10分】请列举你知道的几个安全性的标准的名称？"></a>2. 【10分】请列举你知道的几个安全性的标准的名称？</h3><p><strong>答案</strong>（常见嵌入式&#x2F;工业&#x2F;安全关键领域标准，列3-5个即可）：</p>
+<ul>
+<li>IEC 61508（功能安全通用标准）</li>
+<li>ISO 26262（汽车功能安全标准）</li>
+<li>DO-178C（航空软件认证标准）</li>
+<li>MISRA C（汽车嵌入式C语言安全编码规范）</li>
+<li>Common Criteria (CC) &#x2F; ISO&#x2F;IEC 15408（信息技术安全评估通用准则）</li>
+<li>SIL（Safety Integrity Level，安全完整性等级，常与IEC 61508一起提）</li>
+</ul>
+<h3 id="3-【10分】RISC和CISC指令集的区别？并各举一个例子"><a href="#3-【10分】RISC和CISC指令集的区别？并各举一个例子" class="headerlink" title="3. 【10分】RISC和CISC指令集的区别？并各举一个例子"></a>3. 【10分】RISC和CISC指令集的区别？并各举一个例子</h3><p><strong>区别</strong>（核心对比表）：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>RISC（精简指令集）</th>
+<th>CISC（复杂指令集）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>指令数量</td>
+<td>少而简单</td>
+<td>多而复杂</td>
+</tr>
+<tr>
+<td>指令长度</td>
+<td>固定长度（通常32位）</td>
+<td>可变长度</td>
+</tr>
+<tr>
+<td>执行周期</td>
+<td>大多单周期</td>
+<td>多周期</td>
+</tr>
+<tr>
+<td>寻址方式</td>
+<td>简单，load&#x2F;store架构（内存操作必须通过寄存器）</td>
+<td>丰富，可直接内存-内存操作</td>
+</tr>
+<tr>
+<td>寄存器数量</td>
+<td>多（通常16-32个通用寄存器）</td>
+<td>较少</td>
+</tr>
+<tr>
+<td>硬件复杂度</td>
+<td>简单，易流水线、高频</td>
+<td>复杂</td>
+</tr>
+<tr>
+<td>代表处理器</td>
+<td>ARM、RISC-V、MIPS</td>
+<td>x86（Intel&#x2F;AMD）</td>
+</tr>
+</tbody></table>
+<p><strong>举例</strong>：</p>
+<ul>
+<li><strong>RISC例子</strong>（ARM指令集）：加法必须先把内存数据load到寄存器，再运算，再store回去。<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-keyword">LDR</span> <span class="hljs-built_in">R1</span>, [<span class="hljs-built_in">R2</span>]     <span class="hljs-comment">; 从内存地址R2加载到R1</span><br><span class="hljs-keyword">LDR</span> <span class="hljs-built_in">R3</span>, [<span class="hljs-built_in">R4</span>]<br><span class="hljs-keyword">ADD</span> <span class="hljs-built_in">R0</span>, <span class="hljs-built_in">R1</span>, <span class="hljs-built_in">R3</span>   <span class="hljs-comment">; R0 = R1 + R3</span><br><span class="hljs-keyword">STR</span> <span class="hljs-built_in">R0</span>, [<span class="hljs-built_in">R5</span>]     <span class="hljs-comment">; 存回内存</span><br></code></pre></td></tr></table></figure></li>
+<li><strong>CISC例子</strong>（x86指令集）：一条指令就能完成内存直接运算。<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">add <span class="hljs-comment">[mem1]</span>, <span class="hljs-comment">[mem2]</span>   ; 内存地址mem1 += 内存地址mem2的内容（一条指令搞定）<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-【5分】RISC指令集与CISC指令集的区别是指令是否等长。（-）"><a href="#4-【5分】RISC指令集与CISC指令集的区别是指令是否等长。（-）" class="headerlink" title="4. 【5分】RISC指令集与CISC指令集的区别是指令是否等长。（ ）"></a>4. 【5分】RISC指令集与CISC指令集的区别是指令是否等长。（ ）</h3><p><strong>答案</strong>：<strong>○ 错</strong></p>
+<p><strong>解释</strong>：指令长度是否等长只是<strong>区别之一</strong>，不是<strong>唯一或本质</strong>区别。RISC通常指令等长（利于流水线），CISC指令长度可变，但本质区别在于指令复杂度、执行周期、架构哲学等。题目说法片面，所以是错的。</p>
+<h3 id="5-【10分】PROM，EEPROM，FlashROM的区别？"><a href="#5-【10分】PROM，EEPROM，FlashROM的区别？" class="headerlink" title="5. 【10分】PROM，EEPROM，FlashROM的区别？"></a>5. 【10分】PROM，EEPROM，FlashROM的区别？</h3><p><strong>答案</strong>（核心对比）：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>写入方式</th>
+<th>擦除方式</th>
+<th>擦除粒度</th>
+<th>可擦写次数</th>
+<th>典型容量</th>
+<th>成本&#x2F;用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PROM</td>
+<td>一次性编程（熔丝&#x2F;反熔丝）</td>
+<td>不可擦除</td>
+<td>—</td>
+<td>0次</td>
+<td>小</td>
+<td>早期、一次性烧录</td>
+</tr>
+<tr>
+<td>EEPROM</td>
+<td>电可擦除可编程</td>
+<td>电擦除（按字节&#x2F;字）</td>
+<td>字节级</td>
+<td>10万~100万次</td>
+<td>小~中等</td>
+<td>参数存储、少量数据（配置、校准值）</td>
+</tr>
+<tr>
+<td>Flash ROM</td>
+<td>电可擦除可编程</td>
+<td>电擦除（按块&#x2F;扇区）</td>
+<td>块&#x2F;页级（几KB~几MB）</td>
+<td>1万~10万次</td>
+<td>大</td>
+<td>程序存储、大容量固件、U盘、SSD、BIOS</td>
+</tr>
+</tbody></table>
+<p><strong>一句话总结</strong>：Flash是EEPROM的改进版，容量大、成本低，但擦除必须整块进行；EEPROM支持字节级擦写，更灵活但贵、容量小。</p>
+<h3 id="6-【5分】嵌入式系统引入操作系统的目的是为了更好地使用资源。（-）"><a href="#6-【5分】嵌入式系统引入操作系统的目的是为了更好地使用资源。（-）" class="headerlink" title="6. 【5分】嵌入式系统引入操作系统的目的是为了更好地使用资源。（ ）"></a>6. 【5分】嵌入式系统引入操作系统的目的是为了更好地使用资源。（ ）</h3><p><strong>答案</strong>：<strong>○ 对</strong></p>
+<p><strong>解释</strong>：引入RTOS&#x2F;嵌入式OS的主要目的就是<strong>更好地管理有限的软硬件资源</strong>（任务调度、内存分配、中断管理、实时性保证、提高开发效率、模块化、可移植性等）。虽然资源有限，但OS通过抽象和调度让资源利用更高效、更可靠。所以说法正确。</p>
+<h3 id="7-【20分】用C语言编写一段代码，用于获得结构体某个成员的偏移字节数？（例：struct-aaa-int-x-int-y-long-z-得到z的偏移为8）"><a href="#7-【20分】用C语言编写一段代码，用于获得结构体某个成员的偏移字节数？（例：struct-aaa-int-x-int-y-long-z-得到z的偏移为8）" class="headerlink" title="7. 【20分】用C语言编写一段代码，用于获得结构体某个成员的偏移字节数？（例：struct aaa {int x; int y; long z;}; 得到z的偏移为8）"></a>7. 【20分】用C语言编写一段代码，用于获得结构体某个成员的偏移字节数？（例：struct aaa {int x; int y; long z;}; 得到z的偏移为8）</h3><p><strong>答案</strong>（标准写法，两种常用方式）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stddef.h&gt;</span>  <span class="hljs-comment">// 必须包含这个头文件才有offsetof</span></span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">aaa</span> &#123;</span><br>    <span class="hljs-type">int</span> x;<br>    <span class="hljs-type">int</span> y;<br>    <span class="hljs-type">long</span> z;<br>&#125;;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;<br>    <span class="hljs-comment">// 方法1：标准宏 offsetof（最推荐，类型安全）</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;成员 z 的偏移字节数: %zu\n&quot;</span>, offsetof(<span class="hljs-keyword">struct</span> aaa, z));  <span class="hljs-comment">// 输出8（32位系统常见）</span><br><br>    <span class="hljs-comment">// 方法2：指针法（经典面试写法）</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">aaa</span> <span class="hljs-title">s</span> =</span> &#123;<span class="hljs-number">0</span>&#125;;              <span class="hljs-comment">// 或 struct aaa *p = NULL; 也可以</span><br>    <span class="hljs-type">size_t</span> offset = (<span class="hljs-type">char</span>*)&amp;(s.z) - (<span class="hljs-type">char</span>*)&amp;s;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;成员 z 的偏移字节数: %zu\n&quot;</span>, offset);  <span class="hljs-comment">// 也是8</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>解释</strong>：在32位系统，int占4字节，long占4字节（部分系统long是8字节，偏移会变），所以z偏移&#x3D;4+4&#x3D;8。64位系统long通常8字节，偏移可能&#x3D;8（int对齐）。</p>
+<h3 id="8-【20分】编写对嵌入式系统某32位寄存器-UART-CTRL（地址0x80000000）的bit3赋1的代码"><a href="#8-【20分】编写对嵌入式系统某32位寄存器-UART-CTRL（地址0x80000000）的bit3赋1的代码" class="headerlink" title="8. 【20分】编写对嵌入式系统某32位寄存器 UART_CTRL（地址0x80000000）的bit3赋1的代码"></a>8. 【20分】编写对嵌入式系统某32位寄存器 UART_CTRL（地址0x80000000）的bit3赋1的代码</h3><p><strong>答案</strong>（常见几种安全写法，推荐用位操作）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> UART_CTRL       (*(volatile unsigned long *)0x80000000UL)  <span class="hljs-comment">// 32位寄存器，volatile防止优化</span></span><br><br><span class="hljs-comment">// 方法1：最常用，直接置位（推荐）</span><br>UART_CTRL |= (<span class="hljs-number">1UL</span> &lt;&lt; <span class="hljs-number">3</span>);           <span class="hljs-comment">// bit3 = 1，其他位不变</span><br><br><span class="hljs-comment">// 方法2：先读-改-写（更安全，防止误改其他位）</span><br><span class="hljs-keyword">volatile</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> reg = UART_CTRL;<br>reg |= (<span class="hljs-number">1UL</span> &lt;&lt; <span class="hljs-number">3</span>);<br>UART_CTRL = reg;<br><br><span class="hljs-comment">// 方法3：如果要清零其他位，只置bit3（视需求）</span><br>UART_CTRL = (UART_CTRL &amp; ~(<span class="hljs-number">0xFFFFFFFFU</span>L ^ (<span class="hljs-number">1UL</span> &lt;&lt; <span class="hljs-number">3</span>))) | (<span class="hljs-number">1UL</span> &lt;&lt; <span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>解释</strong>：用<code>volatile</code>防止编译器优化；<code>1UL</code>确保是unsigned long，避免移位溢出；地址用<code>0x80000000UL</code>。</p>
+<h3 id="9-【5分】我国主流的国产环境是X64处理器-Win7-64位操作系统-（-）"><a href="#9-【5分】我国主流的国产环境是X64处理器-Win7-64位操作系统-（-）" class="headerlink" title="9. 【5分】我国主流的国产环境是X64处理器+Win7 64位操作系统 （ ）"></a>9. 【5分】我国主流的国产环境是X64处理器+Win7 64位操作系统 （ ）</h3><p><strong>答案</strong>：<strong>○ 错</strong></p>
+<p><strong>解释</strong>（2026年现状）：国产主流环境已转向<strong>国产自主CPU（如龙芯LoongArch、飞腾FT、鲲鹏ARM、兆芯、海光x86兼容）+ 国产操作系统</strong>（统信UOS、银河麒麟、中科方德、深度Deepin等基于Linux的国产OS）。Win7早已停止支持（2020年结束），且是国外系统，国产化替代已基本完成。X64（x86-64）部分国产CPU支持，但主流趋势是自主架构（如LoongArch）而非纯X64+Win7。</p>
+<p>祝你考试顺利！这些题基本覆盖嵌入式基础核心知识点，背熟这些点基本能拿高分～如果需要更详细解释或英文版答案，随时说！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2026/01/19/Test/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 19, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/17/CeShiTuPian/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
