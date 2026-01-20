@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2025/12/02/C_language/image1.png">
 <meta property="og:image" content="http://example.com/2025/12/02/C_language/code/new-blog/source_posts/C_language/image1.png">
 <meta property="article:published_time" content="2025-12-02T10:50:00.000Z">
-<meta property="article:modified_time" content="2026-01-05T11:57:58.349Z">
+<meta property="article:modified_time" content="2026-01-20T02:37:34.969Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="C语言">
 <meta property="article:tag" content="编程">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          5.3k words
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          43 mins
+          45 mins
         
       </span>
     
@@ -723,6 +723,20 @@ printf(&quot;%d, %zd\n&quot;,sizeof(asd),strlen(asd)    ); //6， 5
 <p>·因此，该联合体的大小为 8 字节。</p>
 <h6 id="6-程序的局部变量存在于栈-stack-中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。"><a href="#6-程序的局部变量存在于栈-stack-中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。" class="headerlink" title="6.程序的局部变量存在于栈(stack) 中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。"></a>6.程序的局部变量存在于栈(stack) 中，全局变量存在于静态数据区中，动态申请数据存在于堆（heap）中。</h6><p><img src="/2025/12/02/C_language/image1.png" srcset="/img/loading.gif" lazyload alt="image1"></p>
 <p><img src="/2025/12/02/C_language/code\new-blog\source_posts\C_language\image1.png" srcset="/img/loading.gif" lazyload alt="image1"></p>
+<p>7.在32位系统中，字是<strong>32位</strong>（4字节）；半字是<strong>16位</strong>（2字节）；字节（Byte）无论什么系统，通常固定为 <strong>8位</strong>。</p>
+<h3 id="内存对齐-Memory-Alignment"><a href="#内存对齐-Memory-Alignment" class="headerlink" title="内存对齐 (Memory Alignment)"></a>内存对齐 (Memory Alignment)</h3><p>大多数嵌入式处理器要求访问数据的地址必须是其长度的倍数：</p>
+<ul>
+<li><strong>访问字 (Word):</strong> 起始地址必须能被 <strong>4</strong> 整除（如 <code>0x00, 0x04, 0x08</code>）。</li>
+<li><strong>访问半字 (Half-word):</strong> 起始地址必须能被 <strong>2</strong> 整除（如 <code>0x00, 0x02, 0x04</code>）。</li>
+<li><strong>如果不服从：</strong> 处理器可能会因为“非对齐访问”产生异常，或者需要分两次读取再拼接，导致运行变慢。</li>
+</ul>
+<p>在实际编写 C 代码（如访问寄存器）时：</p>
+<ul>
+<li><code>uint32_t</code> 对应 <strong>字</strong> (Word)</li>
+<li><code>uint16_t</code> 对应 <strong>半字</strong> (Half-word)</li>
+<li><code>uint8_t</code> 对应 <strong>字节</strong> (Byte)</li>
+</ul>
+<p>如果在操作 <strong>总线接口（UART, SPI, I2C）</strong>，通常是按<strong>字节</strong>传输；但如果在配置 <strong>寄存器</strong>，则必须严格按照手册规定的<strong>字</strong>或<strong>半字</strong>宽度来写。</p>
 
                 
               </div>
