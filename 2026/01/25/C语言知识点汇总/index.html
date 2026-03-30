@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. 运算符 (Operators) 优先级：括号 &gt; 单目 &gt; 算术 &gt; 关系 &gt; 逻辑 &gt; 三目 &gt; 赋值 &gt; 逗号。 自增自减： a++ &#x3D; b++ 错误：a++ 返回的是一个临时值（右值），不能被赋值。 ++a &#x3D; ++b 正确（在 C++ 中）：++a 返回的是变量本身的引用（左值）。但在标准 C 中，两者通常都被视为右值，不可赋值。   效率">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-25T09:52:49.000Z">
-<meta property="article:modified_time" content="2026-03-30T06:50:59.508Z">
+<meta property="article:modified_time" content="2026-03-30T08:26:47.251Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          2.5k words
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          15 mins
+          21 mins
         
       </span>
     
@@ -461,6 +461,72 @@
 <li>初始化指针时所创建的字符串常量被定义为只读，如果试图修改这个字符串的值，程序就会出现未定义的行为 </li>
 <li>数组作为函数的参数时会退化成指针</li>
 </ul>
+<h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a><strong>链表</strong></h1><ol>
+<li>数组和链表的优缺点有哪些？ </li>
+<li>链表的环<ol>
+<li>怎么判断链表有没有环？ </li>
+<li>如何知道环的长度？ </li>
+<li>如何找出环的连接点？</li>
+</ol>
+</li>
+<li>怎么翻转链表？ </li>
+<li>怎么删除链表中间某个节点？（只知道某个被删除节点，不知道其前一个结点地址的情况） </li>
+<li>怎么删除单链表的重复节点？ </li>
+<li>怎么找出单链表倒数第k个节点？ </li>
+<li>怎么找出链表的中间节点？ </li>
+<li>两个单链表相交，如何求交点？ </li>
+<li>怎么判断一个链表是否回文链表？ </li>
+<li>怎么合并两个有序链表？ </li>
+<li>怎么实现双链表？ </li>
+<li>怎么实现循环链表？</li>
+</ol>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a><strong>二叉树</strong></h1><ol>
+<li>二叉树的遍历方法有哪些？ </li>
+<li>怎么求二叉树的深度？ </li>
+<li>怎么判断二叉树是否相等？ </li>
+<li>如何判断一棵树是平衡二叉树？ </li>
+<li>完全二叉树一共有n个节点，求叶子节点个数 </li>
+<li>若用n个权值构造一棵最优二叉树（哈夫曼树），则该二叉树的结点总数为</li>
+</ol>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a><strong>数组</strong></h1><ol>
+<li>给定一个整数数组，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 </li>
+<li>给一个数组和一个值val，原地移除所有数值等于val的元素，并返回移除后数组的新长度 </li>
+<li>合并两个有序数组 </li>
+<li>给定仅有小写字母组成的字符串数组A，返回列表中的每个字符串中都显示的全部字符组成的列表，一个字符出现多少次就要在最终答案中包含多少次 </li>
+<li>寻找数组的中心索引 </li>
+<li>给定一个非负整数数组A，A的所有偶数元素之后跟着所有奇数元素 </li>
+<li>给定一个未经排序的整数数组，找到最长且连续的递增序列</li>
+</ol>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a><strong>字符串</strong></h1><ol>
+<li>有效的括号（leetcode经典题） </li>
+<li>翻转字符串 </li>
+<li>翻转字符串中的单词 </li>
+<li>判断是否回文字符串 </li>
+<li>判断字符串中的单词个数 </li>
+<li>库函数复现<ol>
+<li>strcp </li>
+<li>strlen </li>
+<li>strcat</li>
+</ol>
+</li>
+</ol>
+<h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a><strong>排序算法</strong></h1><ol>
+<li>8大排序算法，主要掌握冒泡排序、快速排序、插入排序的实现 </li>
+<li>了解8个排序算法的时间复杂度、空间复杂度、是否为稳定排序及其基本思想</li>
+</ol>
+<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a><strong>递归</strong></h1><ol>
+<li>递归求1+2+……+n累加 </li>
+<li>递归求n！ </li>
+<li>递归实现斐波那契数列</li>
+</ol>
+<h1 id="其他算法"><a href="#其他算法" class="headerlink" title="其他算法"></a><strong>其他算法</strong></h1><ol>
+<li>一根绳子分成若干份，计算若干份之积，使之成为最大值 </li>
+<li>杨辉三角 </li>
+<li>求一个数的阶乘末尾零的个数 </li>
+<li>输出n以内的素数 </li>
+<li>求数的二进制表示里面的1的个数 </li>
+<li>交换两个变量的值，不使用第三个变量</li>
+</ol>
 
                 
               </div>
@@ -533,8 +599,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/21/%E5%85%B3%E4%BA%8E%E5%8A%A0%E5%BC%BA%E7%BB%9F%E7%AD%B9%E5%8D%8F%E8%B0%83%E5%8F%91%E5%B1%95/" title="关于加强统筹协调发展">
-                        <span class="hidden-mobile">关于加强统筹协调发展</span>
+                      <a href="/2026/01/21/%E5%85%B3%E4%BA%8E%E5%8A%A0%E5%BC%BA%E7%BB%9F%E7%AD%B9%E5%8D%8F%E8%B0%83%E5%8F%91%E5%B1%95/" title="测试是否跑通的hexo">
+                        <span class="hidden-mobile">测试是否跑通的hexo</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
