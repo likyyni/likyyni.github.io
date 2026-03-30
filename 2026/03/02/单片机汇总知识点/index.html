@@ -19,21 +19,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一个非常棒的问题！当你开始从“跑通代码”转向“研究原理”时，你就已经跨入了底层开发的门槛。 在 STM32 中，要让多个引脚（如 PA1 和 PB2）同时使用中断，背后依靠的是一套**“三级跳”**的架构：GPIO → AFIO (数据选择器) → EXTI (外部中断控制器) → NVIC (嵌套向量中断控制器)。  1. 核心矛盾：引脚多而中断线少STM32F103 有几十个 GPIO 口">
+    <meta name="description" content="（主要是针对stm32） 1. GPIOIO有哪三种常用方式？ 轮询（Polling）：CPU不断检测状态寄存器。 中断（Interrupt）：外设准备好后主动通知CPU。 DMA（Direct Memory Access）：外设与内存直接交换数据，不经过CPU。  状态怎么转换？通常通过配置控制寄存器（如STM32的MODER, OTYPER, PUPDR）实现转换。  输入（Input）：高">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于加强统筹协调发展">
-<meta property="og:url" content="http://example.com/2026/01/21/%E5%85%B3%E4%BA%8E%E5%8A%A0%E5%BC%BA%E7%BB%9F%E7%AD%B9%E5%8D%8F%E8%B0%83%E5%8F%91%E5%B1%95/index.html">
+<meta property="og:title" content="单片机汇总知识点">
+<meta property="og:url" content="http://example.com/2026/03/02/%E5%8D%95%E7%89%87%E6%9C%BA%E6%B1%87%E6%80%BB%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这是一个非常棒的问题！当你开始从“跑通代码”转向“研究原理”时，你就已经跨入了底层开发的门槛。 在 STM32 中，要让多个引脚（如 PA1 和 PB2）同时使用中断，背后依靠的是一套**“三级跳”**的架构：GPIO → AFIO (数据选择器) → EXTI (外部中断控制器) → NVIC (嵌套向量中断控制器)。  1. 核心矛盾：引脚多而中断线少STM32F103 有几十个 GPIO 口">
+<meta property="og:description" content="（主要是针对stm32） 1. GPIOIO有哪三种常用方式？ 轮询（Polling）：CPU不断检测状态寄存器。 中断（Interrupt）：外设准备好后主动通知CPU。 DMA（Direct Memory Access）：外设与内存直接交换数据，不经过CPU。  状态怎么转换？通常通过配置控制寄存器（如STM32的MODER, OTYPER, PUPDR）实现转换。  输入（Input）：高">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-01-21T08:04:10.000Z">
-<meta property="article:modified_time" content="2026-02-06T05:20:14.671Z">
+<meta property="article:published_time" content="2026-03-02T06:41:51.000Z">
+<meta property="article:modified_time" content="2026-03-30T06:51:40.640Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>关于加强统筹协调发展 - Hexo</title>
+  <title>单片机汇总知识点 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于加强统筹协调发展"></span>
+            <span id="subtitle" data-typed-text="单片机汇总知识点"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-21 16:04" pubdate>
-          January 21, 2026 pm
+        <time datetime="2026-03-02 14:41" pubdate>
+          March 2, 2026 pm
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          963 words
+          1.7k words
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          9 mins
+          14 mins
         
       </span>
     
@@ -270,106 +270,188 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">关于加强统筹协调发展</h1>
+            <h1 id="seo-header">单片机汇总知识点</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一个非常棒的问题！当你开始从“跑通代码”转向“研究原理”时，你就已经跨入了底层开发的门槛。</p>
-<p>在 STM32 中，要让多个引脚（如 PA1 和 PB2）同时使用中断，背后依靠的是一套**“三级跳”**的架构：<strong>GPIO → AFIO (数据选择器) → EXTI (外部中断控制器) → NVIC (嵌套向量中断控制器)</strong>。</p>
-<hr>
-<h3 id="1-核心矛盾：引脚多而中断线少"><a href="#1-核心矛盾：引脚多而中断线少" class="headerlink" title="1. 核心矛盾：引脚多而中断线少"></a>1. 核心矛盾：引脚多而中断线少</h3><p>STM32F103 有几十个 GPIO 口，但内部的 <strong>EXTI（外部中断线）只有 16 根</strong>（EXTI0 到 EXTI15）。</p>
+                <hr>
+<p>（主要是针对stm32）</p>
+<h2 id="1-GPIO"><a href="#1-GPIO" class="headerlink" title="1. GPIO"></a>1. GPIO</h2><h2 id="IO有哪三种常用方式？"><a href="#IO有哪三种常用方式？" class="headerlink" title="IO有哪三种常用方式？"></a>IO有哪三种常用方式？</h2><ol>
+<li><strong>轮询（Polling）</strong>：CPU不断检测状态寄存器。</li>
+<li><strong>中断（Interrupt）</strong>：外设准备好后主动通知CPU。</li>
+<li><strong>DMA（Direct Memory Access）</strong>：外设与内存直接交换数据，不经过CPU。</li>
+</ol>
+<h2 id="状态怎么转换？"><a href="#状态怎么转换？" class="headerlink" title="状态怎么转换？"></a>状态怎么转换？</h2><p>通常通过配置控制寄存器（如STM32的MODER, OTYPER, PUPDR）实现转换。</p>
 <ul>
-<li><strong>规则</strong>：引脚的数字编号必须对应相同数字的中断线。</li>
-<li><strong>冲突点</strong>：PA0、PB0、PC0 只能有一个连接到 EXTI0；PA1、PB1、PC1 只能有一个连接到 EXTI1。</li>
+<li><strong>输入（Input）</strong>：高阻、上拉或下拉。</li>
+<li><strong>输出（Output）</strong>：推挽（Push-Pull）或开漏（Open-Drain）。</li>
+<li><strong>复用（Alternate Function）</strong>：连接到内部外设（如UART, SPI）。</li>
+<li><strong>模拟（Analog）</strong>：连接到ADC&#x2F;DAC。</li>
 </ul>
-<h3 id="2-详细阐述背后的“幕后功臣”"><a href="#2-详细阐述背后的“幕后功臣”" class="headerlink" title="2. 详细阐述背后的“幕后功臣”"></a>2. 详细阐述背后的“幕后功臣”</h3><h4 id="①-AFIO-复用功能-I-O-——-“调音师-选择器”"><a href="#①-AFIO-复用功能-I-O-——-“调音师-选择器”" class="headerlink" title="① AFIO (复用功能 I&#x2F;O) —— “调音师&#x2F;选择器”"></a>① AFIO (复用功能 I&#x2F;O) —— “调音师&#x2F;选择器”</h4><p>AFIO 在这里起到了**数据选择器（MUX）**的作用。它决定了哪一个具体的物理引脚能接到对应的 EXTI 线上。</p>
-<ul>
-<li><strong>你的需求</strong>：PA1（红外）和 PB2（编码器）。</li>
-<li><strong>AFIO 的配置</strong>：<ul>
-<li>它会将 <strong>PA1</strong> 映射到 <strong>EXTI1</strong>。</li>
-<li>它会将 <strong>PB2</strong> 映射到 <strong>EXTI2</strong>。</li>
+<hr>
+<h2 id="2-中断-Interrupt"><a href="#2-中断-Interrupt" class="headerlink" title="2. 中断 (Interrupt)"></a>2. 中断 (Interrupt)</h2><h2 id="什么是中断？"><a href="#什么是中断？" class="headerlink" title="什么是中断？"></a>什么是中断？</h2><p>指CPU在执行程序过程中，由于内部或外部事件的触发，暂时中止当前程序，转去处理紧急事件，处理完毕后再返回原处继续执行的过程。</p>
+<h2 id="中断的触发方式有哪些？"><a href="#中断的触发方式有哪些？" class="headerlink" title="中断的触发方式有哪些？"></a>中断的触发方式有哪些？</h2><ul>
+<li><strong>电平触发</strong>：高电平或低电平触发。</li>
+<li><strong>边沿触发</strong>：上升沿、下降沿或双边沿触发。</li>
+</ul>
+<h2 id="哪些函数不能在中断中使用？"><a href="#哪些函数不能在中断中使用？" class="headerlink" title="哪些函数不能在中断中使用？"></a>哪些函数不能在中断中使用？</h2><ul>
+<li><strong>包含休眠&#x2F;阻塞机制的函数</strong>（如 <code>delay</code>，<code>malloc</code>，<code>printf</code>）。</li>
+<li><strong>获取信号量&#x2F;互斥锁</strong>（可能导致死锁）。</li>
+<li><strong>不可重入函数</strong>。</li>
+</ul>
+<h2 id="什么叫不可重入函数？"><a href="#什么叫不可重入函数？" class="headerlink" title="什么叫不可重入函数？"></a>什么叫不可重入函数？</h2><p>指不能在多个任务中同时调用，或者在被中断后再次调用会产生不可预料结果的函数。通常是因为函数内部使用了<strong>全局变量、静态变量</strong>或<strong>标准输入输出</strong>。</p>
+<h2 id="中断与异常有何区别？"><a href="#中断与异常有何区别？" class="headerlink" title="中断与异常有何区别？"></a>中断与异常有何区别？</h2><ul>
+<li><strong>中断</strong>：通常指来自CPU外部的异步事件（如按键、定时器）。</li>
+<li><strong>异常</strong>：通常指来自CPU内部同步产生的事件（如除零、指令非法、内存访问越界）。</li>
+</ul>
+<h2 id="中断的响应执行流程是什么？"><a href="#中断的响应执行流程是什么？" class="headerlink" title="中断的响应执行流程是什么？"></a>中断的响应执行流程是什么？</h2><ol>
+<li><strong>中断请求</strong> -&gt; 2. <strong>中断屏蔽位检查</strong> -&gt; 3. <strong>中断优先级判定</strong> -&gt; 4. <strong>保护现场</strong>（压栈） -&gt; 5. <strong>执行中断服务函数(ISR)</strong> -&gt; 6. <strong>恢复现场</strong>（出栈） -&gt; 7. <strong>中断返回</strong>。</li>
+</ol>
+<h2 id="写一个中断服务需要注意哪些？"><a href="#写一个中断服务需要注意哪些？" class="headerlink" title="写一个中断服务需要注意哪些？"></a>写一个中断服务需要注意哪些？</h2><ul>
+<li><strong>快进快出</strong>：代码量要小，执行时间要短。</li>
+<li><strong>不得包含耗时循环或阻塞操作</strong>。</li>
+<li><strong>避免返回值和参数传递</strong>。</li>
+<li>使用 <code>volatile</code> 关键字修饰在ISR中修改的全局变量。</li>
+</ul>
+<h2 id="中断和轮询哪个效率高？"><a href="#中断和轮询哪个效率高？" class="headerlink" title="中断和轮询哪个效率高？"></a>中断和轮询哪个效率高？</h2><ul>
+<li><strong>效率</strong>：通常中断更高，因为CPU不需要无谓地等待。</li>
+<li><strong>决策</strong>：<ul>
+<li>数据随机、频率低且实时性要求高：<strong>中断</strong>。</li>
+<li>数据密集且持续（如高速数据流）：<strong>轮询或DMA</strong>（避免频繁中断导致系统崩溃）。</li>
 </ul>
 </li>
-<li><strong>结论</strong>：因为 1 和 2 是不同的数字，所以它们<strong>不冲突</strong>，可以同时开启。</li>
 </ul>
-<h4 id="②-EXTI-外部中断控制器-——-“边沿检测器”"><a href="#②-EXTI-外部中断控制器-——-“边沿检测器”" class="headerlink" title="② EXTI (外部中断控制器) —— “边沿检测器”"></a>② EXTI (外部中断控制器) —— “边沿检测器”</h4><p>一旦引脚通过 AFIO 接通了 EXTI 线，EXTI 就开始监视电平了。</p>
-<ul>
-<li><strong>功能</strong>：它可以配置是<strong>上升沿触发</strong>、<strong>下降沿触发</strong>还是<strong>双边沿触发</strong>。</li>
-<li><strong>独立性</strong>：EXTI1 和 EXTI2 是互相独立的电路，互不干扰。</li>
+<h2 id="中断优先级有哪些？"><a href="#中断优先级有哪些？" class="headerlink" title="中断优先级有哪些？"></a>中断优先级有哪些？</h2><ul>
+<li><strong>抢占优先级</strong>：高抢占优先级可以打断低抢占优先级。</li>
+<li><strong>响应优先级（子优先级）</strong>：当抢占优先级相同时，决定谁先被处理。</li>
 </ul>
-<h4 id="③-NVIC-嵌套向量中断控制器-——-“总指挥部”"><a href="#③-NVIC-嵌套向量中断控制器-——-“总指挥部”" class="headerlink" title="③ NVIC (嵌套向量中断控制器) —— “总指挥部”"></a>③ NVIC (嵌套向量中断控制器) —— “总指挥部”</h4><p>EXTI 检测到信号后，会向 NVIC 发出中断请求。NVIC 负责决定：</p>
-<ul>
-<li>现在能不能打断主程序？</li>
-<li>如果 EXTI1 和 EXTI2 同时发生，先处理谁？（这就是你提到的<strong>优先级分组</strong>）。</li>
+<h2 id="为什么中断函数不能有输入参数和返回值？"><a href="#为什么中断函数不能有输入参数和返回值？" class="headerlink" title="为什么中断函数不能有输入参数和返回值？"></a>为什么中断函数不能有输入参数和返回值？</h2><p>中断是由硬件随机触发的，没有调用者（Caller）去显式传递参数，也没有接收者去处理返回值。所有寄存器状态必须在中断返回时恢复原状。</p>
+<hr>
+<h2 id="3-定时器-Timer"><a href="#3-定时器-Timer" class="headerlink" title="3. 定时器 (Timer)"></a>3. 定时器 (Timer)</h2><ul>
+<li><strong>特殊模式</strong>：输入捕获（测频率）、输出比较、PWM模式、单脉冲模式、编码器接口模式。</li>
+<li><strong>PWM实现调速</strong>：改变<strong>占空比</strong>（Duty Cycle）来改变电机的平均电压。</li>
 </ul>
 <hr>
-<h3 id="3-如果-PA1-和-PB1-都要用中断怎么办？"><a href="#3-如果-PA1-和-PB1-都要用中断怎么办？" class="headerlink" title="3. 如果 PA1 和 PB1 都要用中断怎么办？"></a>3. 如果 PA1 和 PB1 都要用中断怎么办？</h3><p>这是很多新手会撞上的墙。因为它们都对应 <strong>EXTI1</strong>，在硬件上它们经过 AFIO 连到了同一个开关上。</p>
-<ul>
-<li><strong>结论</strong>：<strong>硬件层面不支持同时使用。</strong> 只能二选一。</li>
-<li><strong>解决办法</strong>：修改硬件接线，把其中一个挪到不同编号的引脚上（比如挪到 PB2），就像你把红外挪到 PB1 避开编码器的 EXTI15_10 一样。</li>
+<h2 id="4-通信协议"><a href="#4-通信协议" class="headerlink" title="4. 通信协议"></a>4. 通信协议</h2><h2 id="异步传输-vs-同步传输"><a href="#异步传输-vs-同步传输" class="headerlink" title="异步传输 vs 同步传输"></a>异步传输 vs 同步传输</h2><ul>
+<li><strong>异步</strong>：不需要时钟线，靠双方约定好的波特率同步，有起始位和停止位（如UART）。</li>
+<li><strong>同步</strong>：有专门的时钟线（CLK），在时钟边沿采样（如SPI, IIC）。</li>
 </ul>
-<hr>
-<h3 id="4-软件层面的“合并与分发”"><a href="#4-软件层面的“合并与分发”" class="headerlink" title="4. 软件层面的“合并与分发”"></a>4. 软件层面的“合并与分发”</h3><p>虽然 EXTI 线有 16 根，但为了节省资源，STM32 并没有给每一根线都准备独立的“值班室”（中断服务函数）。</p>
-<table>
+<h2 id="UART、IIC、SPI-对比"><a href="#UART、IIC、SPI-对比" class="headerlink" title="UART、IIC、SPI 对比"></a>UART、IIC、SPI 对比</h2><table>
 <thead>
 <tr>
-<th><strong>EXTI 线</strong></th>
-<th><strong>对应中断服务函数 (ISR)</strong></th>
-<th><strong>备注</strong></th>
+<th><strong>协议</strong></th>
+<th><strong>线数</strong></th>
+<th><strong>模式</strong></th>
+<th><strong>速度</strong></th>
+<th><strong>距离</strong></th>
+<th><strong>优点</strong></th>
+<th><strong>缺点</strong></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>EXTI0</td>
-<td><code>EXTI0_IRQHandler</code></td>
-<td>专人专岗</td>
+<td><strong>UART</strong></td>
+<td>2</td>
+<td>异步&#x2F;全双工</td>
+<td>低</td>
+<td>中</td>
+<td>硬件简单</td>
+<td>严格波特率匹配</td>
 </tr>
 <tr>
-<td>EXTI1</td>
-<td><code>EXTI1_IRQHandler</code></td>
-<td>专人专岗</td>
+<td><strong>IIC</strong></td>
+<td>2</td>
+<td>同步&#x2F;半双工</td>
+<td>中</td>
+<td>短</td>
+<td>支持多机，线少</td>
+<td>协议稍复杂</td>
 </tr>
 <tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr>
-<td>EXTI5 ~ 9</td>
-<td><code>EXTI9_5_IRQHandler</code></td>
-<td><strong>五人共用</strong></td>
-</tr>
-<tr>
-<td>EXTI10 ~ 15</td>
-<td><code>EXTI15_10_IRQHandler</code></td>
-<td><strong>六人共用</strong></td>
+<td><strong>SPI</strong></td>
+<td>3&#x2F;4</td>
+<td>同步&#x2F;全双工</td>
+<td>高</td>
+<td>短</td>
+<td>速度极快</td>
+<td>线多，无应答机制</td>
 </tr>
 </tbody></table>
-<p><strong>所以，当你用 PA1 和 PB2 时：</strong></p>
-<ol>
-<li>PA1 会进入 <code>EXTI1_IRQHandler</code>。</li>
-<li>PB2 会进入 <code>EXTI2_IRQHandler</code>。</li>
-<li>它们各自有独立的函数，代码写起来最简单，也不会互相打断。</li>
+<hr>
+<h2 id="5-UART-串口"><a href="#5-UART-串口" class="headerlink" title="5. UART 串口"></a>5. UART 串口</h2><ul>
+<li><strong>USART vs UART</strong>：USART支持同步模式，UART仅支持异步模式。</li>
+<li><strong>配置参数</strong>：波特率、起始位、数据位（8&#x2F;9）、校验位（None&#x2F;Odd&#x2F;Even）、停止位。</li>
+<li><strong>RX上拉原因</strong>：确保空闲时电平稳定，防止漂移产生乱码。</li>
+<li><strong>传输浮点数</strong>：<ol>
+<li>使用共用体 <code>union</code> 将浮点数转为4字节数组发送。</li>
+<li>使用 <code>sprintf</code> 转成字符串发送。</li>
+</ol>
+</li>
+<li><strong>接收不定长数据</strong>：<ol>
+<li><strong>串口中断+空闲中断（IDLE）</strong> + <strong>DMA</strong>（STM32常用）。</li>
+<li>设置超时时间。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="6-IIC-I2C"><a href="#6-IIC-I2C" class="headerlink" title="6. IIC (I2C)"></a>6. IIC (I2C)</h2><ul>
+<li><p><strong>信号</strong>：起始信号（SCL高时SDA下降沿）、停止信号（SCL高时SDA上升沿）、ACK&#x2F;NACK信号。</p>
+</li>
+<li><p><strong>上拉原因</strong>：IIC是开漏输出，必须通过外部上拉电阻提供高电平。</p>
+</li>
+<li><p><strong>仲裁机制</strong>：通过“线与”逻辑，发送高电平但检测到总线为低电平的设备失去控制权。</p>
+</li>
+<li><p><strong>1.8V与3.3V通信（无转换芯片）</strong>：</p>
+<blockquote>
+<p>利用IIC开漏特性，将上拉电阻连接至<strong>1.8V电源</strong>。只要3.3V主机的IO口能识别1.8V的高电平阈值（$V_{IH}$），即可安全通信。</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="7-SPI"><a href="#7-SPI" class="headerlink" title="7. SPI"></a>7. SPI</h2><ul>
+<li><strong>速度影响因素</strong>：时钟线电容负载、主从机频率限制、PCB布线阻抗。</li>
+<li><strong>四种模式</strong>：由 <strong>CPOL</strong>（时钟极性）和 <strong>CPHA</strong>（时钟相位）决定。</li>
+</ul>
+<hr>
+<h2 id="8-DMA-ADC"><a href="#8-DMA-ADC" class="headerlink" title="8. DMA &amp; ADC"></a>8. DMA &amp; ADC</h2><h2 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h2><ul>
+<li><strong>机制</strong>：由专用控制器申请总线控制权，在存储器和外设间直接搬运数据，无需CPU参与，搬运完成后通过中断通知CPU。</li>
+</ul>
+<h2 id="ADC"><a href="#ADC" class="headerlink" title="ADC"></a>ADC</h2><ul>
+<li><strong>实现方式</strong>：逐次逼近型（SAR）、积分型、Σ-Δ型。</li>
+<li><strong>滤波方法</strong>：均值滤波、中值滤波、一阶递推滤波、加权平均滤波。</li>
+</ul>
+<hr>
+<h2 id="9-存储与启动"><a href="#9-存储与启动" class="headerlink" title="9. 存储与启动"></a>9. 存储与启动</h2><h2 id="NAND-vs-NOR-Flash"><a href="#NAND-vs-NOR-Flash" class="headerlink" title="NAND vs NOR Flash"></a>NAND vs NOR Flash</h2><ul>
+<li><strong>NOR</strong>：支持<strong>XIP（片上执行）</strong>，读取快，容量小，可靠性高。</li>
+<li><strong>NAND</strong>：以块&#x2F;页为单位读写，容量大，成本低，可能有坏块。</li>
+</ul>
+<h2 id="MCU-启动流程"><a href="#MCU-启动流程" class="headerlink" title="MCU 启动流程"></a>MCU 启动流程</h2><ol>
+<li>上电复位。</li>
+<li>从启动配置处（Flash&#x2F;System Memory）加载堆栈顶地址。</li>
+<li>加载复位向量（Reset Handler）。</li>
+<li>初始化时钟、栈、堆。</li>
+<li>跳转至 <code>main</code>。</li>
 </ol>
 <hr>
-<h3 id="5-总结：写进日报的“干货”"><a href="#5-总结：写进日报的“干货”" class="headerlink" title="5. 总结：写进日报的“干货”"></a>5. 总结：写进日报的“干货”</h3><blockquote>
-<p><strong>今日深度探索：EXTI 中断架构原理</strong></p>
-<ol>
-<li><strong>映射机制</strong>：GPIO 引脚通过 <strong>AFIO</strong> 进行路由，相同 Pin 编号的引脚（如 PAx, PBx）共用同一根 <strong>EXTI</strong> 中断线。</li>
-<li><strong>线逻辑</strong>：16 根 EXTI 线支持独立配置触发边沿，但高位引脚（5-15）在 NVIC 层面进行了通道合并。</li>
-<li><strong>开发心得</strong>：在进行系统引脚规划时，应尽量避开相同 Pin 编号的引脚同时使用中断，以减少中断服务函数内的逻辑判断压力，提高实时性。</li>
-</ol>
-</blockquote>
-<h3 id="💡-明日任务建议："><a href="#💡-明日任务建议：" class="headerlink" title="💡 明日任务建议："></a>💡 明日任务建议：</h3><p>既然你已经理解了中断的原理，明天可以尝试：</p>
-<ol>
-<li><strong>优先级实验</strong>：故意让红外和编码器同时触发，改变它们的<strong>抢占优先级</strong>，看谁的数字先跳。</li>
-<li><strong>时钟树（RCC）</strong>：研究一下为什么配置 AFIO 之前，必须要先用 <code>RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE)</code> 开启它的时钟？不开启会怎样？</li>
-</ol>
-<p>PWM</p>
-<p>pwm频率：frequence &#x3D; CK_PSC&#x2F;(PSC+1)</p>
-<p>pwm占空比：Duty &#x3D; CCR&#x2F;(ARR+1)</p>
-<p>pwm分辨率：Reso &#x3D; 1&#x2F;(ARR+1)</p>
-<p>GPIO 接哪个 CH，就必须用对应的 <code>TIM_OCxInit / TIM_SetComparex</code></p>
+<h2 id="10-ARM-体系结构"><a href="#10-ARM-体系结构" class="headerlink" title="10. ARM 体系结构"></a>10. ARM 体系结构</h2><ul>
+<li><strong>寄存器</strong>：R0~R15。R13(SP), R14(LR), R15(PC)。</li>
+<li><strong>CPSR</strong>：当前程序状态寄存器。<strong>SPSR</strong>：程序状态保存寄存器（异常切换时保存CPSR）。</li>
+<li><strong>哈佛结构</strong>：指令和数据总线分开。<strong>冯诺依曼</strong>：指令和数据共用总线。</li>
+<li><strong>参数传递</strong>：前4个参数通过 R0-R3 传递，超过的压栈。</li>
+</ul>
+<hr>
+<h2 id="11-其他问题"><a href="#11-其他问题" class="headerlink" title="11. 其他问题"></a>11. 其他问题</h2><ul>
+<li><p><strong>交叉编译</strong>：在A平台（如PC）上编译出能在B平台（如ARM）上运行的二进制程序。因为单片机性能不足以运行编译器。</p>
+</li>
+<li><p><strong>0x100000 赋值</strong>：</p>
+<p>C</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">*(<span class="hljs-keyword">volatile</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> *)(<span class="hljs-number">0x100000</span>) = <span class="hljs-number">0x55AA</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>51单片机PSW</strong>：Program Status Word（程序状态字），包含CY（进位）、AC（辅助进位）、OV（溢出）等标志。</p>
+</li>
+</ul>
+<hr>
+<p><strong>面试建议</strong>：回答时先给出定义，再结合具体的单片机（如STM32）谈谈你的实际s项目经验。</p>
 
                 
               </div>
@@ -387,8 +469,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于加强统筹协调发展</div>
-      <div>http://example.com/2026/01/21/关于加强统筹协调发展/</div>
+      <div>单片机汇总知识点</div>
+      <div>http://example.com/2026/03/02/单片机汇总知识点/</div>
     </div>
     <div class="license-meta">
       
@@ -400,7 +482,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 21, 2026</div>
+          <div>March 2, 2026</div>
         </div>
       
       
@@ -432,18 +514,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/25/C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/" title="前端学习">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前端学习</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/20/%E5%A6%99%E5%A6%99%E5%B0%8F%E5%B7%A7%E8%93%9D%E7%89%99%E6%89%93%E5%8D%B0%E6%9C%BA/" title="妙妙小巧蓝牙打印机">
-                        <span class="hidden-mobile">妙妙小巧蓝牙打印机</span>
+                      <a href="/2026/01/26/%E5%AD%A6%E4%B9%A0stm32/" title="学习stm32">
+                        <span class="hidden-mobile">学习stm32</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

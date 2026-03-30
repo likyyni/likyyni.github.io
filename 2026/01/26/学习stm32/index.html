@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="理解**“配置时钟 -&gt; 初始化外设 -&gt; 编写逻辑”**这个流程。 针对 STM32F103C8T6  1. RCC (复位与时钟控制)总结： RCC 是单片机的“心脏”。STM32 为了省电，默认所有外设的时钟都是关闭的。不开启 RCC 时钟，操作任何外设寄存器都无效。  关键点：F103 的 GPIO 挂在 APB2 总线上。  学习例子：开启 GPIOC 时钟 12345&#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习stm32">
+<meta property="og:url" content="http://example.com/2026/01/26/%E5%AD%A6%E4%B9%A0stm32/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="理解**“配置时钟 -&gt; 初始化外设 -&gt; 编写逻辑”**这个流程。 针对 STM32F103C8T6  1. RCC (复位与时钟控制)总结： RCC 是单片机的“心脏”。STM32 为了省电，默认所有外设的时钟都是关闭的。不开启 RCC 时钟，操作任何外设寄存器都无效。  关键点：F103 的 GPIO 挂在 APB2 总线上。  学习例子：开启 GPIOC 时钟 12345&#x2F;&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-26T06:32:58.000Z">
+<meta property="article:modified_time" content="2026-02-11T07:09:28.213Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>学习stm32 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="学习stm32"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-26 14:32" pubdate>
+          January 26, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">学习stm32</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>理解**“配置时钟 -&gt; 初始化外设 -&gt; 编写逻辑”**这个流程。</p>
+<p>针对 STM32F103C8T6</p>
+<hr>
+<h3 id="1-RCC-复位与时钟控制"><a href="#1-RCC-复位与时钟控制" class="headerlink" title="1. RCC (复位与时钟控制)"></a>1. RCC (复位与时钟控制)</h3><p><strong>总结：</strong> RCC 是单片机的“心脏”。STM32 为了省电，默认所有外设的时钟都是关闭的。<strong>不开启 RCC 时钟，操作任何外设寄存器都无效。</strong></p>
+<ul>
+<li><strong>关键点</strong>：F103 的 GPIO 挂在 <strong>APB2</strong> 总线上。</li>
+</ul>
+<p><strong>学习例子：开启 GPIOC 时钟</strong></p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-comment">// 标准库写法</span><br>RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE); <br><br><span class="hljs-comment">// 寄存器底层写法 (理解本质)</span><br>RCC-&gt;APB2ENR |= (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>); <span class="hljs-comment">// GPIOC 在 APB2 使能寄存器的第4位</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-GPIO-通用输入输出"><a href="#2-GPIO-通用输入输出" class="headerlink" title="2. GPIO (通用输入输出)"></a>2. GPIO (通用输入输出)</h3><p><strong>总结：</strong> 它是单片机与外界交流的“触角”。</p>
+<ul>
+<li><strong>输出模式</strong>：推挽输出（Push-Pull，控制 LED、蜂鸣器）、开漏输出（Open-Drain，用于 I2C）。</li>
+<li><strong>输入模式</strong>：上拉&#x2F;下拉输入（检测按键）。</li>
+<li><strong>C8T6 特点</strong>：板载 LED 通常接在 <strong>PC13</strong>。</li>
+</ul>
+<p><strong>学习例子：点亮 PC13 的 LED</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs 1c">GPIO_InitTypeDef GPIO_InitStructure<span class="hljs-punctuation">;</span><br><br>RCC_APB2PeriphClockCmd<span class="hljs-punctuation">(</span>RCC_APB2Periph_GPIOC<span class="hljs-punctuation">,</span> ENABLE<span class="hljs-punctuation">)</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 1. 开时钟</span><br><br>GPIO_InitStructure.GPIO_Pin <span class="hljs-punctuation">=</span> GPIO_Pin_13<span class="hljs-punctuation">;</span>            <span class="hljs-comment">// 2. 选择引脚</span><br>GPIO_InitStructure.GPIO_Mode <span class="hljs-punctuation">=</span> GPIO_Mode_Out_PP<span class="hljs-punctuation">;</span>      <span class="hljs-comment">// 3. 推挽输出</span><br>GPIO_InitStructure.GPIO_Speed <span class="hljs-punctuation">=</span> GPIO_Speed_50MHz<span class="hljs-punctuation">;</span>     <span class="hljs-comment">// 4. 速度</span><br>GPIO_Init<span class="hljs-punctuation">(</span>GPIOC<span class="hljs-punctuation">,</span> <span class="hljs-meta">&amp;GPIO_InitStructure);                <span class="hljs-comment">// 5. 初始化</span></span><br><br>GPIO_ResetBit<span class="hljs-punctuation">(</span>GPIOC<span class="hljs-punctuation">,</span> GPIO_Pin_13<span class="hljs-punctuation">)</span><span class="hljs-punctuation">;</span> <span class="hljs-comment">// 点亮 (低电平点亮)</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-NVIC-EXTI-外部中断"><a href="#3-NVIC-EXTI-外部中断" class="headerlink" title="3. NVIC &amp; EXTI (外部中断)"></a>3. NVIC &amp; EXTI (外部中断)</h3><p><strong>总结：</strong> 中断让单片机能“停下手头的工作，紧急处理突发事件”。</p>
+<ul>
+<li><strong>EXTI</strong>：外部中断控制器，监测引脚电平变化。</li>
+<li><strong>NVIC</strong>：嵌套向量中断控制器，负责管辖所有中断的“优先级”。</li>
+</ul>
+<p><strong>学习例子：按键（PA0）触发中断</strong></p>
+<ol>
+<li><strong>配置 GPIO</strong> 为输入。</li>
+<li><strong>配置 AFIO</strong>（复用功能时钟），将引脚映射到中断线。</li>
+<li><strong>配置 EXTI</strong>（选择触发方式，如下降沿）。</li>
+<li><strong>配置 NVIC</strong>（设置优先级）。</li>
+<li><strong>编写中断服务函数</strong>（名字必须固定，如 <code>EXTI0_IRQHandler</code>）。</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">EXTI0_IRQHandler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">EXTI_GetITStatus</span>(EXTI_Line0) != RESET) &#123;<br>        <span class="hljs-comment">// 执行中断逻辑，比如翻转 LED</span><br>        <span class="hljs-built_in">GPIO_WriteBit</span>(GPIOC, GPIO_Pin_13, (BitAction)(<span class="hljs-number">1</span> - <span class="hljs-built_in">GPIO_ReadOutputDataBit</span>(GPIOC, GPIO_Pin_13)));<br>        <br>        <span class="hljs-built_in">EXTI_ClearITPendingBit</span>(EXTI_Line0); <span class="hljs-comment">// 必须手动清除标志位，否则会死循环</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="💡-学习路径建议-C8T6-专用"><a href="#💡-学习路径建议-C8T6-专用" class="headerlink" title="💡 学习路径建议 (C8T6 专用)"></a>💡 学习路径建议 (C8T6 专用)</h3><ol>
+<li><strong>工程模板</strong>：先搭建好标准库（StdPeriph）或 HAL 库的开发环境（建议初学者从标准库理解寄存器，从 HAL 库上手项目）。</li>
+<li><strong>Debug 技能</strong>：学会用 ST-Link 进行<strong>硬件仿真</strong>。观察变量变化，而不是只靠看 LED 闪烁。</li>
+<li><strong>查阅手册</strong>：手边常备《STM32F10x 中文参考手册》。当你疑惑 <code>RCC_APB2Periph_GPIOC</code> 是什么时，去查 <strong>RCC_APB2ENR</strong> 寄存器。</li>
+</ol>
+<p>在 STM32 项目（或任何多文件 C 项目）中，<strong>全局变量 <code>ccr</code></strong>（用于在中断和主循环间共享 PWM 占空比值）应该严格遵守“<strong>一个定义，多处声明</strong>”的原则。</p>
+<p>正确做法如下（三种文件怎么写）：</p>
+<h3 id="推荐写法（最清晰、最不容易出错）"><a href="#推荐写法（最清晰、最不容易出错）" class="headerlink" title="推荐写法（最清晰、最不容易出错）"></a>推荐写法（最清晰、最不容易出错）</h3><h4 id="1-pwm-h-（头文件，只做声明）"><a href="#1-pwm-h-（头文件，只做声明）" class="headerlink" title="1. pwm.h （头文件，只做声明）"></a>1. <code>pwm.h</code> （头文件，只做<strong>声明</strong>）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> __PWM_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __PWM_H</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stm32f10x.h&quot;</span></span><br><br><span class="hljs-comment">// 声明（告诉其他 .c 文件：这个变量存在于某个地方）</span><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">volatile</span> <span class="hljs-type">uint16_t</span> ccr;   <span class="hljs-comment">// ← 只写 extern，不要初始化！</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">PWM_Init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;            <span class="hljs-comment">// 你的 PWM 初始化函数声明（如果有的话）</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>这里用 <code>extern</code> + <code>volatile</code> 声明。</li>
+<li><strong>不要写 &#x3D;0</strong>，也不要写 <code>uint16_t ccr;</code>（那样会变成定义，会导致多重定义错误）。</li>
+</ul>
+<h4 id="2-main-c-（或其他-c-文件，只有一个地方放定义）"><a href="#2-main-c-（或其他-c-文件，只有一个地方放定义）" class="headerlink" title="2. main.c （或其他 .c 文件，只有一个地方放定义）"></a>2. <code>main.c</code> （或其他 .c 文件，只有一个地方放<strong>定义</strong>）</h4><p>通常建议把<strong>实际定义</strong>（带初始值的地方）放在 <code>main.c</code> 里，因为 main 是程序的“主人”。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stm32f10x.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Delay.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pwm.h&quot;</span>          <span class="hljs-comment">// 包含头文件，才能看到 extern 声明</span></span><br><br><span class="hljs-comment">// 这里才是真正的定义 + 初始化（整个工程只能出现一次！）</span><br><span class="hljs-keyword">volatile</span> <span class="hljs-type">uint16_t</span> ccr = <span class="hljs-number">0</span>;   <span class="hljs-comment">// ← 注意：这里没有 extern，有初始值</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    PWM_Init();           <span class="hljs-comment">// 假设你改成了正确的 PWM 初始化</span><br>    <br>    <span class="hljs-comment">// 可以在这里第一次设置 PWM 值（可选）</span><br>    TIM_SetCompare1(TIM2, ccr);<br><br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-comment">// 如果你想在主循环里做平滑呼吸或显示占空比，可以用 ccr</span><br>        <span class="hljs-comment">// 例如： printf(&quot;当前占空比: %d%%\n&quot;, ccr);</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-pwm-c-（使用变量的地方）"><a href="#3-pwm-c-（使用变量的地方）" class="headerlink" title="3. pwm.c （使用变量的地方）"></a>3. <code>pwm.c</code> （使用变量的地方）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stm32f10x.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pwm.h&quot;</span>          <span class="hljs-comment">// 必须包含，才能看到 extern volatile uint16_t ccr;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">PWM_Init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    <span class="hljs-comment">// ... 你的 TIM2、GPIO、PWM 通道初始化代码 ...</span><br><br>    <span class="hljs-comment">// 可以在这里第一次设置初始占空比（可选）</span><br>    TIM_SetCompare1(TIM2, ccr);   <span class="hljs-comment">// ccr 目前是 0</span><br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">EXTI0_IRQHandler</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    <span class="hljs-keyword">if</span> (EXTI_GetITStatus(EXTI_Line0) != RESET)<br>    &#123;<br>        <span class="hljs-comment">// 消抖 + 更新占空比（你的逻辑）</span><br>        <span class="hljs-keyword">if</span> (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0) == <span class="hljs-number">0</span>)<br>        &#123;<br>            ccr += <span class="hljs-number">20</span>;<br>            <span class="hljs-keyword">if</span> (ccr &gt; <span class="hljs-number">100</span>) ccr = <span class="hljs-number">0</span>;<br><br>            TIM_SetCompare1(TIM2, ccr);   <span class="hljs-comment">// 更新 PWM</span><br>        &#125;<br><br>        EXTI_ClearITPendingBit(EXTI_Line0);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="总结：三个文件里分别怎么写-ccr"><a href="#总结：三个文件里分别怎么写-ccr" class="headerlink" title="总结：三个文件里分别怎么写 ccr"></a>总结：三个文件里分别怎么写 <code>ccr</code></h3><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>应该怎么写</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pwm.h</code></td>
+<td><code>extern volatile uint16_t ccr;</code></td>
+<td>只声明，不定义，不初始化</td>
+</tr>
+<tr>
+<td><code>main.c</code></td>
+<td><code>volatile uint16_t ccr = 0;</code></td>
+<td>真正的定义 + 初始值（只写一次）</td>
+</tr>
+<tr>
+<td><code>pwm.c</code></td>
+<td>什么都不写（直接用 <code>ccr</code> 即可）</td>
+<td>因为包含了 <code>pwm.h</code>，已经知道变量存在</td>
+</tr>
+</tbody></table>
+<h3 id="常见错误-后果"><a href="#常见错误-后果" class="headerlink" title="常见错误 &amp; 后果"></a>常见错误 &amp; 后果</h3><ul>
+<li><p>如果你在 <code>pwm.h</code> 里写了 <code>volatile uint16_t ccr = 0;</code><br>→ 每个包含 pwm.h 的 .c 文件都会定义一个 ccr → <strong>多重定义</strong>链接错误</p>
+</li>
+<li><p>如果你在 <code>pwm.c</code> 和 <code>main.c</code> 都写了 <code>volatile uint16_t ccr = 0;</code><br>→ 同样多重定义错误</p>
+</li>
+<li><p>如果三个文件都没写 <code>volatile</code><br>→ 中断里改的值，主循环可能看不到最新值（编译器优化问题）</p>
+</li>
+<li><p>如果忘了 <code>#include &quot;pwm.h&quot;</code><br>→ 编译器报 <code>ccr 未声明</code></p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>学习stm32</div>
+      <div>http://example.com/2026/01/26/学习stm32/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 26, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/03/02/%E5%8D%95%E7%89%87%E6%9C%BA%E6%B1%87%E6%80%BB%E7%9F%A5%E8%AF%86%E7%82%B9/" title="单片机汇总知识点">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">单片机汇总知识点</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/25/C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/" title="前端学习">
+                        <span class="hidden-mobile">前端学习</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

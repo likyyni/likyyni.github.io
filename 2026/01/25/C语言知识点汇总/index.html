@@ -19,21 +19,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一个非常棒的问题！当你开始从“跑通代码”转向“研究原理”时，你就已经跨入了底层开发的门槛。 在 STM32 中，要让多个引脚（如 PA1 和 PB2）同时使用中断，背后依靠的是一套**“三级跳”**的架构：GPIO → AFIO (数据选择器) → EXTI (外部中断控制器) → NVIC (嵌套向量中断控制器)。  1. 核心矛盾：引脚多而中断线少STM32F103 有几十个 GPIO 口">
+    <meta name="description" content="1. 运算符 (Operators) 优先级：括号 &gt; 单目 &gt; 算术 &gt; 关系 &gt; 逻辑 &gt; 三目 &gt; 赋值 &gt; 逗号。 自增自减： a++ &#x3D; b++ 错误：a++ 返回的是一个临时值（右值），不能被赋值。 ++a &#x3D; ++b 正确（在 C++ 中）：++a 返回的是变量本身的引用（左值）。但在标准 C 中，两者通常都被视为右值，不可赋值。   效率">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于加强统筹协调发展">
-<meta property="og:url" content="http://example.com/2026/01/21/%E5%85%B3%E4%BA%8E%E5%8A%A0%E5%BC%BA%E7%BB%9F%E7%AD%B9%E5%8D%8F%E8%B0%83%E5%8F%91%E5%B1%95/index.html">
+<meta property="og:title" content="前端学习">
+<meta property="og:url" content="http://example.com/2026/01/25/C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这是一个非常棒的问题！当你开始从“跑通代码”转向“研究原理”时，你就已经跨入了底层开发的门槛。 在 STM32 中，要让多个引脚（如 PA1 和 PB2）同时使用中断，背后依靠的是一套**“三级跳”**的架构：GPIO → AFIO (数据选择器) → EXTI (外部中断控制器) → NVIC (嵌套向量中断控制器)。  1. 核心矛盾：引脚多而中断线少STM32F103 有几十个 GPIO 口">
+<meta property="og:description" content="1. 运算符 (Operators) 优先级：括号 &gt; 单目 &gt; 算术 &gt; 关系 &gt; 逻辑 &gt; 三目 &gt; 赋值 &gt; 逗号。 自增自减： a++ &#x3D; b++ 错误：a++ 返回的是一个临时值（右值），不能被赋值。 ++a &#x3D; ++b 正确（在 C++ 中）：++a 返回的是变量本身的引用（左值）。但在标准 C 中，两者通常都被视为右值，不可赋值。   效率">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-01-21T08:04:10.000Z">
-<meta property="article:modified_time" content="2026-02-06T05:20:14.671Z">
+<meta property="article:published_time" content="2026-01-25T09:52:49.000Z">
+<meta property="article:modified_time" content="2026-03-30T06:50:59.508Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>关于加强统筹协调发展 - Hexo</title>
+  <title>前端学习 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于加强统筹协调发展"></span>
+            <span id="subtitle" data-typed-text="前端学习"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-21 16:04" pubdate>
-          January 21, 2026 pm
+        <time datetime="2026-01-25 17:52" pubdate>
+          January 25, 2026 pm
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          963 words
+          1.8k words
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          9 mins
+          15 mins
         
       </span>
     
@@ -270,106 +270,197 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">关于加强统筹协调发展</h1>
+            <h1 id="seo-header">前端学习</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一个非常棒的问题！当你开始从“跑通代码”转向“研究原理”时，你就已经跨入了底层开发的门槛。</p>
-<p>在 STM32 中，要让多个引脚（如 PA1 和 PB2）同时使用中断，背后依靠的是一套**“三级跳”**的架构：<strong>GPIO → AFIO (数据选择器) → EXTI (外部中断控制器) → NVIC (嵌套向量中断控制器)</strong>。</p>
-<hr>
-<h3 id="1-核心矛盾：引脚多而中断线少"><a href="#1-核心矛盾：引脚多而中断线少" class="headerlink" title="1. 核心矛盾：引脚多而中断线少"></a>1. 核心矛盾：引脚多而中断线少</h3><p>STM32F103 有几十个 GPIO 口，但内部的 <strong>EXTI（外部中断线）只有 16 根</strong>（EXTI0 到 EXTI15）。</p>
-<ul>
-<li><strong>规则</strong>：引脚的数字编号必须对应相同数字的中断线。</li>
-<li><strong>冲突点</strong>：PA0、PB0、PC0 只能有一个连接到 EXTI0；PA1、PB1、PC1 只能有一个连接到 EXTI1。</li>
-</ul>
-<h3 id="2-详细阐述背后的“幕后功臣”"><a href="#2-详细阐述背后的“幕后功臣”" class="headerlink" title="2. 详细阐述背后的“幕后功臣”"></a>2. 详细阐述背后的“幕后功臣”</h3><h4 id="①-AFIO-复用功能-I-O-——-“调音师-选择器”"><a href="#①-AFIO-复用功能-I-O-——-“调音师-选择器”" class="headerlink" title="① AFIO (复用功能 I&#x2F;O) —— “调音师&#x2F;选择器”"></a>① AFIO (复用功能 I&#x2F;O) —— “调音师&#x2F;选择器”</h4><p>AFIO 在这里起到了**数据选择器（MUX）**的作用。它决定了哪一个具体的物理引脚能接到对应的 EXTI 线上。</p>
-<ul>
-<li><strong>你的需求</strong>：PA1（红外）和 PB2（编码器）。</li>
-<li><strong>AFIO 的配置</strong>：<ul>
-<li>它会将 <strong>PA1</strong> 映射到 <strong>EXTI1</strong>。</li>
-<li>它会将 <strong>PB2</strong> 映射到 <strong>EXTI2</strong>。</li>
+                <hr>
+<h2 id="1-运算符-Operators"><a href="#1-运算符-Operators" class="headerlink" title="1. 运算符 (Operators)"></a>1. 运算符 (Operators)</h2><ul>
+<li><strong>优先级</strong>：括号 &gt; 单目 &gt; 算术 &gt; 关系 &gt; 逻辑 &gt; 三目 &gt; 赋值 &gt; <strong>逗号</strong>。</li>
+<li><strong>自增自减</strong>：<ul>
+<li><code>a++ = b++</code> 错误：<code>a++</code> 返回的是一个临时值（右值），不能被赋值。</li>
+<li><code>++a = ++b</code> 正确（在 C++ 中）：<code>++a</code> 返回的是变量本身的引用（左值）。但在<strong>标准 C</strong> 中，两者通常都被视为右值，不可赋值。</li>
 </ul>
 </li>
-<li><strong>结论</strong>：因为 1 和 2 是不同的数字，所以它们<strong>不冲突</strong>，可以同时开启。</li>
-</ul>
-<h4 id="②-EXTI-外部中断控制器-——-“边沿检测器”"><a href="#②-EXTI-外部中断控制器-——-“边沿检测器”" class="headerlink" title="② EXTI (外部中断控制器) —— “边沿检测器”"></a>② EXTI (外部中断控制器) —— “边沿检测器”</h4><p>一旦引脚通过 AFIO 接通了 EXTI 线，EXTI 就开始监视电平了。</p>
-<ul>
-<li><strong>功能</strong>：它可以配置是<strong>上升沿触发</strong>、<strong>下降沿触发</strong>还是<strong>双边沿触发</strong>。</li>
-<li><strong>独立性</strong>：EXTI1 和 EXTI2 是互相独立的电路，互不干扰。</li>
-</ul>
-<h4 id="③-NVIC-嵌套向量中断控制器-——-“总指挥部”"><a href="#③-NVIC-嵌套向量中断控制器-——-“总指挥部”" class="headerlink" title="③ NVIC (嵌套向量中断控制器) —— “总指挥部”"></a>③ NVIC (嵌套向量中断控制器) —— “总指挥部”</h4><p>EXTI 检测到信号后，会向 NVIC 发出中断请求。NVIC 负责决定：</p>
-<ul>
-<li>现在能不能打断主程序？</li>
-<li>如果 EXTI1 和 EXTI2 同时发生，先处理谁？（这就是你提到的<strong>优先级分组</strong>）。</li>
+<li><strong>效率</strong>：<code>++i</code> 比 <code>i++</code> 效率高。因为 <code>i++</code> 需要产生一个临时变量来保存旧值，而 <code>++i</code> 直接对变量操作并返回。</li>
 </ul>
 <hr>
-<h3 id="3-如果-PA1-和-PB1-都要用中断怎么办？"><a href="#3-如果-PA1-和-PB1-都要用中断怎么办？" class="headerlink" title="3. 如果 PA1 和 PB1 都要用中断怎么办？"></a>3. 如果 PA1 和 PB1 都要用中断怎么办？</h3><p>这是很多新手会撞上的墙。因为它们都对应 <strong>EXTI1</strong>，在硬件上它们经过 AFIO 连到了同一个开关上。</p>
-<ul>
-<li><strong>结论</strong>：<strong>硬件层面不支持同时使用。</strong> 只能二选一。</li>
-<li><strong>解决办法</strong>：修改硬件接线，把其中一个挪到不同编号的引脚上（比如挪到 PB2），就像你把红外挪到 PB1 避开编码器的 EXTI15_10 一样。</li>
+<h2 id="2-输入输出-I-O"><a href="#2-输入输出-I-O" class="headerlink" title="2. 输入输出 (I&#x2F;O)"></a>2. 输入输出 (I&#x2F;O)</h2><ul>
+<li><strong>scanf vs gets</strong>：<code>scanf</code> 遇到空格、制表符、回车会停止；<code>gets</code> 只在遇到回车时停止（但 <code>gets</code> 不安全，易导致溢出，建议用 <code>fgets</code>）。</li>
+<li><strong>抑制符 <code>\*</code></strong>：<code>scanf(&quot;%*d %d&quot;, &amp;a);</code> 表示跳过第一个整数，将第二个整数存入 <code>a</code>。</li>
+<li><strong>printf 压栈</strong>：<code>printf</code> 的参数是从右向左压栈计算的，所以 <code>printf(&quot;%d %d&quot;, *ptr, *(++ptr))</code> 的结果取决于编译器对表达式求值的顺序（通常先算右边）。</li>
 </ul>
 <hr>
-<h3 id="4-软件层面的“合并与分发”"><a href="#4-软件层面的“合并与分发”" class="headerlink" title="4. 软件层面的“合并与分发”"></a>4. 软件层面的“合并与分发”</h3><p>虽然 EXTI 线有 16 根，但为了节省资源，STM32 并没有给每一根线都准备独立的“值班室”（中断服务函数）。</p>
-<table>
+<h2 id="3-预处理-Pre-processing"><a href="#3-预处理-Pre-processing" class="headerlink" title="3. 预处理 (Pre-processing)"></a>3. 预处理 (Pre-processing)</h2><ul>
+<li><strong>编译过程</strong>：预处理 -&gt; 编译 -&gt; 汇编 -&gt; 链接。</li>
+<li><strong>宏处理阶段</strong>：在<strong>预处理</strong>阶段进行简单的文本替换。</li>
+<li><strong>#error</strong>：强制编译器停止编译并输出错误信息，常用于检查宏定义或环境配置。</li>
+<li><strong>1年秒数</strong>：<code>#define SECONDS_IN_YEAR (60UL * 60UL * 24UL * 365UL)</code>（使用 <code>UL</code> 防止溢出）。</li>
+</ul>
+<hr>
+<h2 id="4-关键字-Keywords"><a href="#4-关键字-Keywords" class="headerlink" title="4. 关键字 (Keywords)"></a>4. 关键字 (Keywords)</h2><ul>
+<li><strong>static</strong>：<ol>
+<li>修饰局部变量：延长生命周期至程序结束，只初始化一次。</li>
+<li>修饰全局变量&#x2F;函数：限制作用域，使其仅在当前 <code>.c</code> 文件可见。</li>
+</ol>
+</li>
+<li><strong>const</strong>：<ul>
+<li><code>const int *p;</code> 指向常量的指针（内容不可变）。</li>
+<li><code>int * const p;</code> 指针常量（地址不可变）。</li>
+</ul>
+</li>
+<li><strong>volatile</strong>：告诉编译器该变量易变，禁止优化（每次必须从内存读取，而非寄存器缓存）。场景：硬件寄存器、中断里的全局变量、多线程共享变量。</li>
+<li><strong>extern “C”</strong>：告诉 C++ 编译器按照 C 语言的规则翻译函数名，解决 C++ 函数重载导致的符号修饰问题。</li>
+<li><strong>sizeof vs strlen</strong>：<code>sizeof</code> 是运算符，编译时确定，返回内存空间大小；<code>strlen</code> 是函数，运行时确定，计算字符串 <code>\0</code> 前的长度。</li>
+</ul>
+<hr>
+<h2 id="5-堆栈-Heap-Stack"><a href="#5-堆栈-Heap-Stack" class="headerlink" title="5. 堆栈 (Heap &amp; Stack)"></a>5. 堆栈 (Heap &amp; Stack)</h2><table>
 <thead>
 <tr>
-<th><strong>EXTI 线</strong></th>
-<th><strong>对应中断服务函数 (ISR)</strong></th>
-<th><strong>备注</strong></th>
+<th><strong>特性</strong></th>
+<th><strong>栈 (Stack)</strong></th>
+<th><strong>堆 (Heap)</strong></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>EXTI0</td>
-<td><code>EXTI0_IRQHandler</code></td>
-<td>专人专岗</td>
+<td><strong>管理方式</strong></td>
+<td>编译器自动分配释放</td>
+<td>程序员手动申请释放</td>
 </tr>
 <tr>
-<td>EXTI1</td>
-<td><code>EXTI1_IRQHandler</code></td>
-<td>专人专岗</td>
+<td><strong>空间连续性</strong></td>
+<td>连续空间（向低地址生长）</td>
+<td>不连续（链表管理）</td>
 </tr>
 <tr>
-<td>…</td>
-<td>…</td>
-<td>…</td>
+<td><strong>效率</strong></td>
+<td>极高</td>
+<td>相对较低</td>
 </tr>
 <tr>
-<td>EXTI5 ~ 9</td>
-<td><code>EXTI9_5_IRQHandler</code></td>
-<td><strong>五人共用</strong></td>
-</tr>
-<tr>
-<td>EXTI10 ~ 15</td>
-<td><code>EXTI15_10_IRQHandler</code></td>
-<td><strong>六人共用</strong></td>
+<td><strong>大小</strong></td>
+<td>固定且较小（通常几M）</td>
+<td>很大，受限于物理内存</td>
 </tr>
 </tbody></table>
-<p><strong>所以，当你用 PA1 和 PB2 时：</strong></p>
-<ol>
-<li>PA1 会进入 <code>EXTI1_IRQHandler</code>。</li>
-<li>PB2 会进入 <code>EXTI2_IRQHandler</code>。</li>
-<li>它们各自有独立的函数，代码写起来最简单，也不会互相打断。</li>
-</ol>
+<ul>
+<li><strong>溢出原因</strong>：栈溢出（无限递归、局部大数组）；堆溢出（内存泄漏、申请空间过大）。</li>
+</ul>
 <hr>
-<h3 id="5-总结：写进日报的“干货”"><a href="#5-总结：写进日报的“干货”" class="headerlink" title="5. 总结：写进日报的“干货”"></a>5. 总结：写进日报的“干货”</h3><blockquote>
-<p><strong>今日深度探索：EXTI 中断架构原理</strong></p>
+<h2 id="6-指针-Pointers"><a href="#6-指针-Pointers" class="headerlink" title="6. 指针 (Pointers)"></a>6. 指针 (Pointers)</h2><ul>
+<li><strong>指针数组 vs 数组指针</strong>：<ul>
+<li><code>int *p[10];</code> <strong>指针数组</strong>：一个数组，里面存了10个指针。</li>
+<li><code>int (*p)[10];</code> <strong>数组指针</strong>：一个指针，指向一个含有10个整数的数组。</li>
+</ul>
+</li>
+<li><strong>函数指针</strong>：<code>int (*p)(int);</code> 指向函数的地址。常用于<strong>回调函数</strong>。</li>
+<li><strong>野指针</strong>：指向已释放或非法内存的指针。<strong>避免方法</strong>：初始化为 <code>NULL</code>，释放后立即置 <code>NULL</code>。</li>
+</ul>
+<hr>
+<h2 id="7-内存分配与程序结构"><a href="#7-内存分配与程序结构" class="headerlink" title="7. 内存分配与程序结构"></a>7. 内存分配与程序结构</h2><ul>
+<li><strong>内存分区</strong>：栈区、堆区、全局&#x2F;静态存储区、常量存储区、代码区。</li>
+<li><strong>内存泄漏</strong>：<code>malloc</code> 申请的内存没有 <code>free</code>。</li>
+<li><strong>malloc(1.2G)</strong>：在 32 位系统中，由于用户空间通常只有 3G 且内存碎片存在，很难申请到连续的 1.2G；在 64 位系统且开启虚拟内存时，通常可以成功。</li>
+</ul>
+<hr>
+<h2 id="8-大小端-Endianness"><a href="#8-大小端-Endianness" class="headerlink" title="8. 大小端 (Endianness)"></a>8. 大小端 (Endianness)</h2><ul>
+<li><p><strong>大端 (Big-endian)</strong>：高位字节存放在低地址。</p>
+</li>
+<li><p><strong>小端 (Little-endian)</strong>：低位字节存放在低地址（STM32&#x2F;x86 常用）。</p>
+</li>
+<li><p><strong>判断方法</strong>：</p>
+<p>C</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs abnf">union &#123;<br>    int i<span class="hljs-comment">;</span><br>    char c<span class="hljs-comment">;</span><br>&#125; u<span class="hljs-comment">;</span><br>u.i <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>if(u.c <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-number">1</span>) // 小端<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="9-核心定义练习"><a href="#9-核心定义练习" class="headerlink" title="9. 核心定义练习"></a>9. 核心定义练习</h2><ul>
+<li><code>int a;</code> (一个整型数)</li>
+<li><code>int *a;</code> (一个指向整型数的指针)</li>
+<li><code>int **a;</code> (一个指向指针的指针)</li>
+<li><code>int a[10];</code> (一个有10个整型数的数组)</li>
+<li><code>int *a[10];</code> (一个有10个指针的数组)</li>
+<li><code>int (*a)[10];</code> (一个指向有10个整型数数组的指针)</li>
+<li><code>int (*a)(int);</code> (一个指向函数的指针)</li>
+<li><code>int (*a[10])(int);</code> (一个有10个指针的数组，指向返回整型的函数)</li>
+</ul>
+<hr>
+<h2 id="10-其他高频问题"><a href="#10-其他高频问题" class="headerlink" title="10. 其他高频问题"></a>10. 其他高频问题</h2><ul>
+<li><strong>不用新变量交换 a, b</strong>：<ul>
+<li><code>a = a ^ b; b = a ^ b; a = a ^ b;</code> (异或法，最推荐)</li>
+<li><code>a = a + b; b = a - b; a = a - b;</code> (加减法，可能溢出)</li>
+</ul>
+</li>
+<li><strong>计算二进制中1的个数</strong>：使用 <code>x = x &amp; (x - 1)</code>。该操作每次会消除二进制中最右边的一个 <code>1</code>。</li>
+<li><strong>字节对齐</strong>：为了提高 CPU 访问内存的效率。如果不地址对齐，CPU 可能需要两次内存访问才能读完一个变量。</li>
+<li><strong>数组退化</strong>：当数组作为函数参数传递时，它会退化为指向首元素的指针。所以 <code>void func(int arr[])</code> 里的 <code>sizeof(arr)</code> 在 64 位系统下结果是 8。</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a><strong>其他</strong></h1><ol>
+<li><p>不定义新的变量，怎么直接交换两个变量的值？（加减方法和异或方法）</p>
+</li>
+<li><p>如何计算二进制中1的个数？（平行算法）</p>
+</li>
+<li><p>每种数据类型的大小？</p>
+</li>
+<li><p>定义以下变量：</p>
 <ol>
-<li><strong>映射机制</strong>：GPIO 引脚通过 <strong>AFIO</strong> 进行路由，相同 Pin 编号的引脚（如 PAx, PBx）共用同一根 <strong>EXTI</strong> 中断线。</li>
-<li><strong>线逻辑</strong>：16 根 EXTI 线支持独立配置触发边沿，但高位引脚（5-15）在 NVIC 层面进行了通道合并。</li>
-<li><strong>开发心得</strong>：在进行系统引脚规划时，应尽量避开相同 Pin 编号的引脚同时使用中断，以减少中断服务函数内的逻辑判断压力，提高实时性。</li>
+<li><p>一个整型数； </p>
+</li>
+<li><p>一个指向整型数的指针； </p>
+</li>
+<li><p>一个指向指针的指针，它指向的指针是指向一个整型数； </p>
+</li>
+<li><p>一个有10个整型的数组； </p>
+</li>
+<li><p>一个有10个指针的数组，该指针是指向一个整型数； </p>
+</li>
+<li><p>一个指向有10个整型数数组的指针；  </p>
+</li>
+<li><p>一个指向函数的指针，该函数有一个整型参数并返回一个整型数； </p>
+</li>
+<li><p>一个有10个指针的数组，该指针指向一个函数，该函数有一个整型参数并返回一个整型数 </p>
+</li>
+<li><p><code>int a;</code> (一个整型数)</p>
+<p><code>int *a;</code> (一个指向整型数的指针)</p>
+<p><code>int **a;</code> (一个指向指针的指针)</p>
+<p><code>int a[10];</code> (一个有10个整型数的数组)</p>
+<p><code>int *a[10];</code> (一个有10个指针的数组)</p>
+<p><code>int (*a)[10];</code> (一个指向有10个整型数数组的指针)</p>
+<p><code>int (*a)(int);</code> (一个指向函数的指针)</p>
+<p><code>int (*a[10])(int);</code> (一个有10个指针的数组，指向返回整型的函数)</p>
+</li>
 </ol>
-</blockquote>
-<h3 id="💡-明日任务建议："><a href="#💡-明日任务建议：" class="headerlink" title="💡 明日任务建议："></a>💡 明日任务建议：</h3><p>既然你已经理解了中断的原理，明天可以尝试：</p>
-<ol>
-<li><strong>优先级实验</strong>：故意让红外和编码器同时触发，改变它们的<strong>抢占优先级</strong>，看谁的数字先跳。</li>
-<li><strong>时钟树（RCC）</strong>：研究一下为什么配置 AFIO 之前，必须要先用 <code>RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE)</code> 开启它的时钟？不开启会怎样？</li>
+</li>
+<li><p>变量作用域有哪些？</p>
+</li>
+<li><p>浮点数怎么判断相等？</p>
+</li>
+<li><p>如何用C语言实现读写寄存器变量？</p>
+</li>
+<li><p>数组下标可以为负数吗？</p>
+</li>
+<li><p>什么是字节对齐，为什么要对齐？</p>
+</li>
+<li><p>已知数组table，用宏求数组元素个数。</p>
+</li>
+<li><p>带参宏和函数的区别？</p>
+</li>
+<li><p>内联函数的优缺点和适用场景是什么？</p>
+</li>
+<li><p>全局变量和局部变量的区别？</p>
+</li>
+<li><p>全局变量可不可以定义在可被多个.c文件包含的头文件中</p>
+</li>
+<li><p>float型数据是怎么存储的？</p>
+</li>
+<li><p>什么是左值，什么是右值？</p>
+</li>
 </ol>
-<p>PWM</p>
-<p>pwm频率：frequence &#x3D; CK_PSC&#x2F;(PSC+1)</p>
-<p>pwm占空比：Duty &#x3D; CCR&#x2F;(ARR+1)</p>
-<p>pwm分辨率：Reso &#x3D; 1&#x2F;(ARR+1)</p>
-<p>GPIO 接哪个 CH，就必须用对应的 <code>TIM_OCxInit / TIM_SetComparex</code></p>
+<ul>
+<li>x&#x3D;x&amp;(x-1)，用于计算x的二进制中1的个数，也可以判断一个数是不是2的n次方 </li>
+<li>初始化指针时所创建的字符串常量被定义为只读，如果试图修改这个字符串的值，程序就会出现未定义的行为 </li>
+<li>数组作为函数的参数时会退化成指针</li>
+</ul>
 
                 
               </div>
@@ -387,8 +478,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于加强统筹协调发展</div>
-      <div>http://example.com/2026/01/21/关于加强统筹协调发展/</div>
+      <div>前端学习</div>
+      <div>http://example.com/2026/01/25/C语言知识点汇总/</div>
     </div>
     <div class="license-meta">
       
@@ -400,7 +491,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 21, 2026</div>
+          <div>January 25, 2026</div>
         </div>
       
       
@@ -432,9 +523,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/25/C%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/" title="前端学习">
+                      <a href="/2026/01/26/%E5%AD%A6%E4%B9%A0stm32/" title="学习stm32">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前端学习</span>
+                        <span class="hidden-mobile">学习stm32</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -442,8 +533,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/20/%E5%A6%99%E5%A6%99%E5%B0%8F%E5%B7%A7%E8%93%9D%E7%89%99%E6%89%93%E5%8D%B0%E6%9C%BA/" title="妙妙小巧蓝牙打印机">
-                        <span class="hidden-mobile">妙妙小巧蓝牙打印机</span>
+                      <a href="/2026/01/21/%E5%85%B3%E4%BA%8E%E5%8A%A0%E5%BC%BA%E7%BB%9F%E7%AD%B9%E5%8D%8F%E8%B0%83%E5%8F%91%E5%B1%95/" title="关于加强统筹协调发展">
+                        <span class="hidden-mobile">关于加强统筹协调发展</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
